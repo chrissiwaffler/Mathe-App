@@ -20,9 +20,10 @@ class MyApp extends StatelessWidget {
         accentColor: Colors.lightGreen[500],
 
         textTheme: GoogleFonts.expletusSansTextTheme(
-          Theme.of(context).textTheme,
+          Theme.of(context).textTheme,         
         )
         
+
 
       ),
       home: MyHomePage(
@@ -43,14 +44,16 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   
   
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text(
           widget.title,
-          textAlign: TextAlign.center,),
+          style: TextStyle(fontSize: 30),
+          textAlign: TextAlign.center,
+        ),
       ),
       body: Container(
         padding: EdgeInsets.only(top: 100, left: 50),
@@ -61,44 +64,53 @@ class _MyHomePageState extends State<MyHomePage> {
             // Lernteil
             // mit Padding, damit die Row nicht bis ganz nach rechts geht
             Padding(
-              padding: EdgeInsets.only(right: 400),
+              padding: EdgeInsets.only(right: 0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   // Button für Lerninhalte
-                  new ButtonsHomescreen(
+                 new Flexible(
+                  child:  new ButtonsHomescreen(
                     "Lernteil",
                     Farbe.lernteil,
                     Colors.white,
                     Colors.white,   
                     Lernteil()
-                  ).build(context),  
+                  ).build(context),
+                 )
+                 ,  
               ],),
             ),
 
             // Übungsteil
             Padding(
-              padding: EdgeInsets.only(right: 600),
+              padding: EdgeInsets.only(right: 0),
               child:Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   // Button für Übungsteil
-                  new ButtonsHomescreen(
-                    "Übungsteil", 
-                    Farbe.uebungsteil_aufgaben, 
-                    Colors.white,
-                    Colors.white, 
-                    MyApp()
-                  ).build(context),
+                  new Flexible(
+                    child: new ButtonsHomescreen(
+                      "Übungsteil", 
+                      Farbe.uebungsteil_aufgaben, 
+                      Colors.white,
+                      Colors.white, 
+                      MyApp()
+                    ).build(context),
+                  ),
+                  
 
                   // Button für Lösungen vom Übungsteil
-                  new ButtonsHomescreen(
-                    "Lösungen", 
-                    Colors.white, 
-                    Farbe.uebungsteil_loesungen,
-                    Colors.black, 
-                    MyApp()
-                  ).build(context),
+                  new Flexible(
+                    child: new ButtonsHomescreen(
+                      "Lösungen", 
+                      Colors.white, 
+                      Farbe.uebungsteil_loesungen,
+                      Colors.black, 
+                      MyApp()
+                    ).build(context),
+                  ),
+                  
 
                   // Bild
                   //Image(image: AssetImage('graphics/mathe_bild.jpg'),)
@@ -108,28 +120,33 @@ class _MyHomePageState extends State<MyHomePage> {
 
             // Quiz
             Padding(
-              padding: EdgeInsets.only(right: 600),
+              padding: EdgeInsets.only(right: 0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
+                   
                   // Button für Quizze
-                  new ButtonsHomescreen(
-                    "Quiz", 
-                    Farbe.quiz_aufgaben, 
-                    Colors.white, 
-                    Colors.white,   
-                    MyApp()
-                  ).build(context),  
-                
-                  // Button für Lösungen von den Quizzen
-                  new ButtonsHomescreen(
-                    "Lösungen",
-                    Colors.white, 
-                    Farbe.quiz_loesungen, 
-                    Colors.black,   
-                    MyApp()
-                  ).build(context)
+                  new Flexible(
+                    child: new ButtonsHomescreen(
+                      "Quiz", 
+                      Farbe.quiz_aufgaben, 
+                      Colors.white, 
+                      Colors.white,   
+                      MyApp()
+                    ).build(context), 
+                  ),
 
+                  // Button für Lösungen von den Quizzen 
+                  new Flexible(
+                    child: new ButtonsHomescreen(
+                      "Lösungen",
+                      Colors.white, 
+                      Farbe.quiz_loesungen, 
+                      Colors.black,   
+                      MyApp()
+                    ).build(context),
+                  )
+                  
               ],)
             ),       
 
