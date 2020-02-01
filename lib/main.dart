@@ -43,6 +43,48 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   
+  final button_lernteil = ButtonsHomescreen(
+    "Lernteil",
+    Farbe.lernteil,
+    Colors.white,
+    Colors.white,   
+    Lernteil()
+  );
+
+  final button_uebungsteil = ButtonsHomescreen(
+    "Übungsteil", 
+    Farbe.uebungsteil_aufgaben, 
+    Colors.white,
+    Colors.white, 
+    MyApp()
+  );
+
+  final button_quiz = ButtonsHomescreen(
+    "Quiz", 
+    Farbe.quiz_aufgaben, 
+    Colors.white, 
+    Colors.white,   
+    MyApp()
+  );
+
+  final button_uebungsteil_loesungen = ButtonsHomescreen(
+    "Lösungen", 
+    Colors.white, 
+    Farbe.uebungsteil_loesungen,
+    Colors.black, 
+    MyApp()
+  );
+
+  final button_quiz_loesungen = ButtonsHomescreen(
+    "Lösungen",
+    Colors.white, 
+    Farbe.quiz_loesungen, 
+    Colors.black,   
+    MyApp()
+  );
+
+  static const double OFFSETLeft = 100;
+  static const double OFFSETBetween = 20;
   
   @override
   Widget build(BuildContext context) {
@@ -55,62 +97,29 @@ class _MyHomePageState extends State<MyHomePage> {
           textAlign: TextAlign.center,
         ),
       ),
-      body: Container(
-        padding: EdgeInsets.only(top: 100, left: 50),
-        child:  Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+      body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
                   
             // Lernteil
             // mit Padding, damit die Row nicht bis ganz nach rechts geht
             Padding(
-              padding: EdgeInsets.only(right: 0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  // Button für Lerninhalte
-                 new Flexible(
-                  child:  new ButtonsHomescreen(
-                    "Lernteil",
-                    Farbe.lernteil,
-                    Colors.white,
-                    Colors.white,   
-                    Lernteil()
-                  ).build(context),
-                 )
-                 ,  
-              ],),
+              padding: EdgeInsets.only(left: OFFSETLeft, top: OFFSETLeft),
+              child: button_lernteil.build(context),
             ),
 
             // Übungsteil
             Padding(
-              padding: EdgeInsets.only(right: 0),
+              padding: EdgeInsets.only(left: OFFSETLeft, top: OFFSETBetween),
               child:Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   // Button für Übungsteil
-                  new Flexible(
-                    child: new ButtonsHomescreen(
-                      "Übungsteil", 
-                      Farbe.uebungsteil_aufgaben, 
-                      Colors.white,
-                      Colors.white, 
-                      MyApp()
-                    ).build(context),
-                  ),
+                  button_uebungsteil.build(context),
                   
-
                   // Button für Lösungen vom Übungsteil
-                  new Flexible(
-                    child: new ButtonsHomescreen(
-                      "Lösungen", 
-                      Colors.white, 
-                      Farbe.uebungsteil_loesungen,
-                      Colors.black, 
-                      MyApp()
-                    ).build(context),
-                  ),
-                  
+                  button_uebungsteil_loesungen.build(context),
+                                 
 
                   // Bild
                   //Image(image: AssetImage('graphics/mathe_bild.jpg'),)
@@ -120,32 +129,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
             // Quiz
             Padding(
-              padding: EdgeInsets.only(right: 0),
+              padding: EdgeInsets.only(left: OFFSETLeft, top: OFFSETBetween),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                    
                   // Button für Quizze
-                  new Flexible(
-                    child: new ButtonsHomescreen(
-                      "Quiz", 
-                      Farbe.quiz_aufgaben, 
-                      Colors.white, 
-                      Colors.white,   
-                      MyApp()
-                    ).build(context), 
-                  ),
+                  button_quiz.build(context), 
 
                   // Button für Lösungen von den Quizzen 
-                  new Flexible(
-                    child: new ButtonsHomescreen(
-                      "Lösungen",
-                      Colors.white, 
-                      Farbe.quiz_loesungen, 
-                      Colors.black,   
-                      MyApp()
-                    ).build(context),
-                  )
+                  button_quiz_loesungen.build(context),
                   
               ],)
             ),       
@@ -153,8 +146,6 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
           
         ) 
-  ,
-      )
     );
   }
 }
