@@ -1,0 +1,23 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+
+class ListeLernteil extends StatelessWidget {
+  ListeLernteil({Key key}) : super(key: key);
+
+  factory ListeLernteilState.fromJson(Map<String, dynamic> parsedJson) {
+    
+    String content_kapitel = parsedJson['Kapitel'];
+    3
+    }
+
+  
+  Future<String> _loadLernteilDataAsset() async {
+    return await rootBundle.loadString('assets/data/lernteil.json');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ;
+  }
+}
