@@ -1,27 +1,69 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_full_pdf_viewer/flutter_full_pdf_viewer.dart';
+import 'package:path_provider/path_provider.dart';
 
 class Lernteil extends StatefulWidget {
-  Lernteil({Key key, this.pdfPath }) : super(key: key);
-
-  final String pdfPath;
+  Lernteil({Key key}) : super(key: key);
 
   @override
-  _LernteilState createState() => _LernteilState(pdfPath);
+  _LernteilState createState() => _LernteilState();
 }
 
 class _LernteilState extends State<Lernteil> {
-  
+  String _documentPath = 'assets/PDFs/HandoutInformatiker.pdf';
+
+  Future<String> prepareTestPdf() async {
+    final ByteData bytes =
+        await DefaultAssetBundle.of(context).load(_documentPath);
+    final Uint8List list = bytes.buffer.asUint8List();
+
+    final tempDir = await getTemporaryDirectory();
+    final tempDocumentPath = '${tempDir.path}/$_documentPath';
+
+    final file = await File(tempDocumentPath).create(recursive: true);
+    file.writeAsBytesSync(list);
+    return tempDocumentPath;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Lernteil"),
+      ),
+      body: Container(
+        child: RaisedButton(
+          onPressed: () => {
+            // We need to prepare the test PDF, and then we can display the PDF.
+            prepareTestPdf().then((path) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => FullPdfViewerScreen(path)),
+              );
+            })
+          },
+          child: const Text('PDF ansehen'),
+        ),
+      ),
+    );
+  }
+}
+
+class FullPdfViewerScreen extends StatelessWidget {
   final String pdfPath;
-  _LernteilState(this.pdfPath);
-  
+
+  FullPdfViewerScreen(this.pdfPath);
+
   @override
   Widget build(BuildContext context) {
     return PDFViewerScaffold(
-      appBar: AppBar(
-        title: Text("Lerninhalte"),
-      ),
-      path: pdfPath,
-    );
+        appBar: AppBar(
+          title: Text("Document"),
+        ),
+        path: pdfPath);
   }
 }
