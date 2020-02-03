@@ -20,7 +20,7 @@ class JsonLoader {
     
     List data_list = json_file[0];
     for(int i; i<data_list.length/2; i++) {
-      String name = data_list = 
+      //String name = data_list  
     }
   }
 

@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:mathe_app/buttons_homescreen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mathe_app/lernteil.dart';
+import 'package:mathe_app/quiz/quiz.dart';
+import 'package:mathe_app/uebungsteil/uebungen.dart';
+import 'package:mathe_app/viewing%20pdf/viewing_pdf.dart';
 
 import 'design_registry.dart';
 
@@ -43,31 +46,32 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   
-  final button_lernteil = ButtonsHomescreen(
+  final buttonLernteil = ButtonsHomescreen(
     "Lernteil",
     Farbe.lernteil,
     Colors.white,
     Colors.white,   
     Lernteil()
+    //PDFSite()
   );
 
-  final button_uebungsteil = ButtonsHomescreen(
+  final buttonUebungsteil = ButtonsHomescreen(
     "Übungsteil", 
     Farbe.uebungsteil_aufgaben, 
     Colors.white,
     Colors.white, 
-    MyApp()
+    Uebungen(),
   );
 
-  final button_quiz = ButtonsHomescreen(
+  final buttonQuiz = ButtonsHomescreen(
     "Quiz", 
     Farbe.quiz_aufgaben, 
     Colors.white, 
     Colors.white,   
-    MyApp()
+    Quiz()
   );
 
-  final button_uebungsteil_loesungen = ButtonsHomescreen(
+  final buttonUebungsteilLoesungen = ButtonsHomescreen(
     "Lösungen", 
     Colors.white, 
     Farbe.uebungsteil_loesungen,
@@ -75,7 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
     MyApp()
   );
 
-  final button_quiz_loesungen = ButtonsHomescreen(
+  final buttonQuizLoesungen = ButtonsHomescreen(
     "Lösungen",
     Colors.white, 
     Farbe.quiz_loesungen, 
@@ -105,7 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
             // mit Padding, damit die Row nicht bis ganz nach rechts geht
             Padding(
               padding: EdgeInsets.only(left: OFFSETLeft, top: OFFSETLeft),
-              child: button_lernteil.build(context),
+              child: buttonLernteil.build(context),
             ),
 
             // Übungsteil
@@ -115,12 +119,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   // Button für Übungsteil
-                  button_uebungsteil.build(context),
+                  buttonUebungsteil.build(context),
                   
                   // Button für Lösungen vom Übungsteil
-                  button_uebungsteil_loesungen.build(context),
-                                 
-
+                  buttonUebungsteilLoesungen.build(context),  
+                               
                   // Bild
                   //Image(image: AssetImage('graphics/mathe_bild.jpg'),)
 
@@ -135,10 +138,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: <Widget>[
                    
                   // Button für Quizze
-                  button_quiz.build(context), 
+                  buttonQuiz.build(context), 
 
                   // Button für Lösungen von den Quizzen 
-                  button_quiz_loesungen.build(context),
+                  buttonQuizLoesungen.build(context),
                   
               ],)
             ),       
