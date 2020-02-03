@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mathe_app/lernteil.dart';
 import 'package:mathe_app/quiz/quiz.dart';
 import 'package:mathe_app/uebungsteil/uebungen.dart';
-import 'package:mathe_app/viewing%20pdf/viewing_pdf.dart';
 
 import 'design_registry.dart';
 
