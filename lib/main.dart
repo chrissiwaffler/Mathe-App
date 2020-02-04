@@ -16,21 +16,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Mathe App',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        brightness: Brightness.light,
-        primaryColor: Colors.cyan[600],
-        accentColor: Colors.lightGreen[500],
-
-        textTheme: GoogleFonts.expletusSansTextTheme(
-          Theme.of(context).textTheme,         
-        )
-        
-
-
-      ),
+          primarySwatch: Colors.blue,
+          brightness: Brightness.light,
+          primaryColor: Colors.cyan[600],
+          accentColor: Colors.lightGreen[500],
+          textTheme: GoogleFonts.expletusSansTextTheme(
+            Theme.of(context).textTheme,
+          )),
       home: MyHomePage(
         title: 'Mathe App',
-        
       ),
     );
   }
@@ -44,53 +38,40 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  
   final buttonLernteil = ButtonsHomescreen(
-    "Lernteil",
-    Farbe.lernteil,
-    Colors.white,
-    Colors.white,   
-    Lernteil()
-    //PDFSite()
-  );
+      "Lernteil", Farbe.lernteil, Colors.white, Colors.white, Lernteil()
+      //PDFSite()
+      );
 
   final buttonUebungsteil = ButtonsHomescreen(
-    "Übungsteil", 
-    Farbe.uebungsteil_aufgaben, 
+    "Übungsteil",
+    Farbe.uebungsteil_aufgaben,
     Colors.white,
-    Colors.white, 
+    Colors.white,
     Uebungen(),
   );
 
   final buttonQuiz = ButtonsHomescreen(
-    "Quiz", 
-    Farbe.quiz_aufgaben, 
-    Colors.white, 
-    Colors.white,   
-    Quiz()
-  );
+      "Quiz", Farbe.quiz_aufgaben, Colors.white, Colors.white, Quiz());
 
-  final buttonUebungsteilLoesungen = ButtonsHomescreen(
-    "Lösungen", 
-    Colors.white, 
-    Farbe.uebungsteil_loesungen,
-    Colors.black, 
-    MyApp()
-  );
+  final buttonUebungsteilLoesungen = ButtonsHomescreen("Lösungen", Colors.white,
+      Farbe.uebungsteil_loesungen, Colors.black, MyApp());
 
   final buttonQuizLoesungen = ButtonsHomescreen(
-    "Lösungen",
-    Colors.white, 
-    Farbe.quiz_loesungen, 
-    Colors.black,   
-    MyApp()
-  );
+      "Lösungen", Colors.white, Farbe.quiz_loesungen, Colors.black, MyApp());
 
   static const double OFFSETLeft = 100;
   static const double OFFSETBetween = 20;
-  
+
+  isHorizontal() {
+    Orientation currentOrientation = MediaQuery.of(context).orientation;
+    return currentOrientation==Orientation.landscape?true : false;
+  }
+
   @override
   Widget build(BuildContext context) {
+    var listViewOrientation = isHorizontal()==true?Axis.vertical : Axis.horizontal;
+    print("Horizontal: "+ isHorizontal().toString());
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -100,10 +81,15 @@ class _MyHomePageState extends State<MyHomePage> {
           textAlign: TextAlign.center,
         ),
       ),
-      body: Column(
+      // TODO: ListView umändern:
+      // so dass man kein ListView braucht und die Größe der Buttons an die Größe des Geräts angepasst werden
+      // so kann die App aufm Tablet und aufm Handy angesehen werden
+      body: ListView(
+        scrollDirection: listViewOrientation,
+        children: <Widget>[
+        Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-                  
             // Lernteil
             // mit Padding, damit die Row nicht bis ganz nach rechts geht
             Padding(
@@ -114,40 +100,37 @@ class _MyHomePageState extends State<MyHomePage> {
             // Übungsteil
             Padding(
               padding: EdgeInsets.only(left: OFFSETLeft, top: OFFSETBetween),
-              child:Row(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   // Button für Übungsteil
                   buttonUebungsteil.build(context),
-                  
+
                   // Button für Lösungen vom Übungsteil
-                  buttonUebungsteilLoesungen.build(context),  
-                               
+                  buttonUebungsteilLoesungen.build(context),
+
                   // Bild
                   //Image(image: AssetImage('graphics/mathe_bild.jpg'),)
-
-              ],),
+                ],
+              ),
             ),
 
             // Quiz
             Padding(
-              padding: EdgeInsets.only(left: OFFSETLeft, top: OFFSETBetween),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                   
-                  // Button für Quizze
-                  buttonQuiz.build(context), 
+                padding: EdgeInsets.only(left: OFFSETLeft, top: OFFSETBetween),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    // Button für Quizze
+                    buttonQuiz.build(context),
 
-                  // Button für Lösungen von den Quizzen 
-                  buttonQuizLoesungen.build(context),
-                  
-              ],)
-            ),       
-
+                    // Button für Lösungen von den Quizzen
+                    buttonQuizLoesungen.build(context),
+                  ],
+                )),
           ],
-          
-        ) 
+        )
+      ]),
     );
   }
 }
