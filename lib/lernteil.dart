@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_full_pdf_viewer/flutter_full_pdf_viewer.dart';
+import 'package:mathe_app/lernteil/liste_lerninhalte.dart';
 import 'package:path_provider/path_provider.dart';
 
 class Lernteil extends StatefulWidget {
@@ -38,13 +39,16 @@ class _LernteilState extends State<Lernteil> {
         child: RaisedButton(
           onPressed: () => {
             // We need to prepare the test PDF, and then we can display the PDF.
-            prepareTestPdf().then((path) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => FullPdfViewerScreen(path)),
-              );
-            })
+            // prepareTestPdf().then((path) {
+            //   Navigator.push(
+            //     context,
+            //     MaterialPageRoute(
+            //         builder: (context) => FullPdfViewerScreen(path)),
+            //   );
+            // })
+            Navigator.push(
+              context, MaterialPageRoute(builder:(context) => ListeLerninhalte())
+            )
           },
           child: const Text('PDF ansehen'),
         ),
