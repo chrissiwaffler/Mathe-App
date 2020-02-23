@@ -29,6 +29,7 @@ class _HomeState extends State<Home> {
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => _tabs[index]));
     });
   }
 

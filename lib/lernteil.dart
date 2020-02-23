@@ -36,23 +36,9 @@ class _LernteilState extends State<Lernteil> {
         title: Text("Lernteil"),
       ),
       body: Container(
-        child: RaisedButton(
-          onPressed: () => {
-            // We need to prepare the test PDF, and then we can display the PDF.
-            // prepareTestPdf().then((path) {
-            //   Navigator.push(
-            //     context,
-            //     MaterialPageRoute(
-            //         builder: (context) => FullPdfViewerScreen(path)),
-            //   );
-            // })
-            Navigator.push(
-              context, MaterialPageRoute(builder:(context) => ListeLerninhalte())
-            )
-          },
-          child: const Text('PDF ansehen'),
-        ),
+        child: ListeLerninhalte()
       ),
+    
     );
   }
 }
