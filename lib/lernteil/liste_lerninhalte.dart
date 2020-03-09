@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mathe_app/lernteil/viewing_lerninhalte.dart';
 
 class ListeLerninhalte extends StatefulWidget {
   ListeLerninhalte({Key key}) : super(key: key);
@@ -11,6 +12,7 @@ class ListeLerninhalte extends StatefulWidget {
 }
 
 class _ListeLerninhalteState extends State<ListeLerninhalte> {
+  
   Future<List<String>> _loadLerninhalteList() async {
     String txt = await rootBundle.loadString('assets/Lerninhalte/liste_lerninhalte.txt');
     List <String> list = LineSplitter().convert(txt).toList();
@@ -20,7 +22,10 @@ class _ListeLerninhalteState extends State<ListeLerninhalte> {
 
 
   Widget makeCard(String heading, String subtitle) {
-    return ClipRRect(
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => new AnsichtLerninhalt()));},
+      child: ClipRRect(
       // Radius der Kante des Schatten
       borderRadius: BorderRadius.circular(10.0),
       child: Card(
@@ -33,7 +38,8 @@ class _ListeLerninhalteState extends State<ListeLerninhalte> {
           decoration: BoxDecoration(
             color: Colors.indigo[400], ),
           child: makeListTile(heading, subtitle)
-        )));
+        )))
+    );
   }
 
   Widget makeListTile(String heading, String subtitle) {
@@ -71,7 +77,7 @@ class _ListeLerninhalteState extends State<ListeLerninhalte> {
         return ListView.builder(
           itemCount: liste.length,
           itemBuilder: (BuildContext context, int index) {
-            return makeCard('${liste[index]}', ">Untertitel<");
+            return makeCard('${liste[index]}', " >Untertitel< ");
           },
           padding: const EdgeInsets.all(8),
          );
