@@ -1,6 +1,12 @@
 # mathe_app
 
-A new Flutter project.
+Mathe App für die 10. Klasse im Rahmen des P-Seminars des Gymnasium Beilngries.
+
+-----
+App-Details:
+AndroidManifest.xml
+Name: Mathe App 10. Klasse
+package: com.gymbei.mathe_app
 
 ## Getting Started
 
