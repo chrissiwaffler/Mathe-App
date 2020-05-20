@@ -19,8 +19,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  
-
   // für die Navigationsleiste unten
   int _selectedIndex = 0;
 
@@ -71,4 +69,4 @@ class _HomeState extends State<Home> {
           onTap: _onItemTapped,
         ));
   }
-}
+}  
