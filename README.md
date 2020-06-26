@@ -1,6 +1,6 @@
 # Mathe App
 
-Mathe App für die 10. Klasse im Rahmen des P-Seminars des Gymnasium Beilngries.
+Mathe App für die Jahrgangsstufe 10 des Gymnasiums im Rahmen des P-Seminars des Gymnasium Beilngries.
 
 -----
 

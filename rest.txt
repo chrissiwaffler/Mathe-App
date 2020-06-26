@@ -1,0 +1,4 @@
+path_provider:file:///C:/Users/bauer/AppData/Local/Programs/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-1.6.8/lib/
+path_provider_macos:file:///C:/Users/bauer/AppData/Local/Programs/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-0.0.4+2/lib/
+path_provider_platform_interface:file:///C:/Users/bauer/AppData/Local/Programs/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_platform_interface-1.0.2/lib/
+pedantic:file:///C:/Users/bauer/AppData/Local/Programs/flutter/.pub-cache/hosted/pub.dartlang.org/pedantic-1.8.0+1/lib/
