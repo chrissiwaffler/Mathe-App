@@ -1,16 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:mathe_app/bottom_navigation_bar.dart';
-import 'package:mathe_app/buttons_homescreen.dart';
-import 'package:mathe_app/design_registry.dart';
-import 'package:mathe_app/lernteil.dart';
-import 'package:mathe_app/main.dart';
-import 'package:mathe_app/profil.dart';
-import 'package:mathe_app/quiz/quiz.dart';
-import 'package:mathe_app/uebungsteil/uebungen.dart';
-import 'package:flutter/material.dart';
+import 'package:mathe_app/index.dart';
+
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key key}) : super(key: key);
+
   final String title = "Mathe App";
 
   @override
@@ -18,34 +11,135 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final buttonLernteil = ButtonsHomescreen(
-      "Lernteil", Farbe.lernteil, Colors.white, Colors.white, Lernteil()
-      //PDFSite()
-      );
-
-  final buttonUebungsteil = ButtonsHomescreen(
-    "Übungsteil",
-    Farbe.uebungsteil_aufgaben,
-    Colors.white,
-    Colors.white,
-    Uebungen(),
-  );
-
-  final buttonQuiz = ButtonsHomescreen(
-      "Quiz", Farbe.quiz_aufgaben, Colors.white, Colors.white, Quiz());
-
-  final buttonUebungsteilLoesungen = ButtonsHomescreen("Lösungen", Colors.white,
-      Farbe.uebungsteil_loesungen, Colors.black, MyApp());
-
-  final buttonQuizLoesungen = ButtonsHomescreen(
-      "Lösungen", Colors.white, Farbe.quiz_loesungen, Colors.black, MyApp());
-
-  static const double OFFSETLeft = 100;
   static const double OFFSETBetween = 20;
+  static const double OFFSETLeft = 100;
+
+  // final buttonLernteil = ButtonsHomescreen(
+  //     "Lernteil", Farbe.lernteil, Colors.white, Colors.white, Lernteil()
+  //     //PDFSite()
+  //     );
+
+  // final buttonQuiz = ButtonsHomescreen(
+  //     "Quiz", Farbe.quiz_aufgaben, Colors.white, Colors.white, Quiz());
+
+  // final buttonQuizLoesungen = ButtonsHomescreen(
+  //     "Lösungen", Colors.white, Farbe.quiz_loesungen, Colors.black, MyApp());
+
+  // final buttonUebungsteil = ButtonsHomescreen(
+  //   "Übungsteil",
+  //   Farbe.uebungsteil_aufgaben,
+  //   Colors.white,
+  //   Colors.white,
+  //   Uebungen(),
+  // );
+
+  // final buttonUebungsteilLoesungen = ButtonsHomescreen("Lösungen", Colors.white,
+  //     Farbe.uebungsteil_loesungen, Colors.black, MyApp());
+
+  BottomNaviBar bNaviBar;
+
+  @override
+  void initState() { 
+    super.initState();
+    bNaviBar = BottomNaviBar();
+    bNaviBar.createState();
+    // update();
+  }
 
   isHorizontal() {
     Orientation currentOrientation = MediaQuery.of(context).orientation;
     return currentOrientation == Orientation.landscape ? true : false;
+  }
+
+  Future<int> getHeightImage() async {
+    File image = new File('assets/images/StartscreenLernen.png');
+    var decodedImage = await decodeImageFromList(image.readAsBytesSync());
+    int img_height = decodedImage.height;
+    int img_width = decodedImage.width;
+  }
+
+  /// Learning Part:
+  
+  Widget imageLearningStudent() {
+    return new Container(
+      width: MediaQuery.of(context).size.width/2,
+      alignment: Alignment.topCenter,
+      child: Image(
+        image: new AssetImage('assets/images/StartscreenStudy.png')
+      ),
+    );
+  }
+
+  Widget textLearningPart() {
+    return new Container(
+      width: MediaQuery.of(context).size.width/2,
+      alignment: Alignment.topCenter,
+      child: new Text(
+        "Lernen",
+        style: TextStyle(
+          color: Colors.black,
+          fontFamily: "SF Pro Custom",
+          fontSize: 60,
+          fontWeight: FontWeight.w800
+        ),
+      ),
+    );
+  }
+
+  Widget learningPart() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      // mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        textLearningPart(), 
+        imageLearningStudent()
+      ],
+    );
+  }
+
+
+  /// Excersice Part:
+  
+  Widget imageExcersiceStudent() {
+    return new Container(
+      width: MediaQuery.of(context).size.width/2,
+      alignment: Alignment.topCenter,
+      child: Image(
+        image: new AssetImage('assets/images/StartscreenExcersice.png')));
+  }
+
+  Widget textExcersicePart() {
+    return new Container(
+      width: MediaQuery.of(context).size.width/2,
+      alignment: Alignment.topCenter,
+      child: new Text(
+        "Üben",
+        style: TextStyle(
+          color: Colors.black,
+          fontFamily: "SF Pro Custom",
+          fontSize: 60,
+          fontWeight: FontWeight.w800
+        )
+      )
+    );
+  }
+
+  Widget excersicePart() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        textExcersicePart(),
+        imageExcersiceStudent()
+      ],
+    );
+  }
+
+  /// TOOD Borderside nur auf oberen Rand machne
+  /// sonnst sind die Nachbahrn entzünt
+  BorderSide border() {
+    return new BorderSide(
+
+    );
   }
 
   @override
@@ -55,58 +149,79 @@ class _HomeScreenState extends State<HomeScreen> {
     print("Horizontal: " + isHorizontal().toString());
 
     return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text(
-            widget.title,
-            style: TextStyle(fontSize: 30),
-            textAlign: TextAlign.center,
-          ),
+      backgroundColor: color_background,
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: color_top_bar_app,
+        title: Text(
+          widget.title,
+          style: top_bar_text_style,
+          textAlign: TextAlign.center,
         ),
-        // so dass man kein ListView braucht und die Größe der Buttons an die Größe des Geräts angepasst werden
-        // so kann die App aufm Tablet und aufm Handy angesehen werden
-        body: ListView(scrollDirection: listViewOrientation, children: <Widget>[
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              // Lernteil
-              // mit Padding, damit die Row nicht bis ganz nach rechts geht
-              Padding(
-                padding: EdgeInsets.only(left: OFFSETLeft, top: OFFSETLeft),
-                child: buttonLernteil,
-              ),
 
-              // Übungsteil
-              Padding(
-                padding: EdgeInsets.only(left: OFFSETLeft, top: OFFSETBetween),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    // Button für Übungsteil
-                    buttonUebungsteil,
-                    // Button für Lösungen vom Übungsteil
-                    buttonUebungsteilLoesungen,
-                    // Bild
-                    //Image(image: AssetImage('graphics/mathe_bild.jpg'),)
-                  ],
+        leading: Padding(
+          padding: EdgeInsets.only(left: 20.0),
+          child: ImageIcon(AssetImage("assets/images/PiSymbol.png"),
+            size: 20)),
+      ),
+
+      body: Column(
+          children: <Widget>[
+            
+            Padding(
+              padding: const EdgeInsets.only(top: 30.0, bottom: 40.0, left: 20.0, right: 20.0),
+              child: Text(
+                "Mathematik App für die 10. Klasse des Gymnasiums",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontFamily: "SF Pro Custom",
+                  fontWeight: FontWeight.w300,
+                  fontSize: 40,
                 ),
+                textAlign: TextAlign.center,
               ),
+            ),
 
-              // Quiz
-              Padding(
-                  padding:
-                      EdgeInsets.only(left: OFFSETLeft, top: OFFSETBetween),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
+            // white background container
+            Expanded(
+              // flex: ,
+                child: Container(
+                  decoration: BoxDecoration(
+                    // border: Border.symmetric(
+                    //   horizontal: BorderSide(color: Color.fromRGBO(0, 0, 0, 0)),
+                    //   // color: 
+                    // ),
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(60), topRight: Radius.circular(60)),
+                    // borderRadius: BorderRadius.all(Radius.circular(60)),
+                    color: Colors.white,
+                    boxShadow: [BoxShadow(
+                      color: color_shadow,
+                      blurRadius: 30.0,
+                      offset: Offset(5, 5)
+                    )]
+                  ),
+
+                  // width: MediaQuery.of(context).size.width,
+                  // height: MediaQuery.of(context).size.height,
+                  
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      // Button für Quizze
-                      buttonQuiz,
-                      // Button für Lösungen von den Quizzen
-                      buttonQuizLoesungen
+                      learningPart(),
+                      excersicePart(),
+
                     ],
-                  )),
-            ],
-          )
-        ]));
+                  )
+
+                ),
+            )
+          ]),
+      
+      bottomNavigationBar: bNaviBar,
+      );
+      
+      
+        
+  
   }
 }
