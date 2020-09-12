@@ -1,13 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:mathe_app/bottom_navigation_bar.dart';
-import 'package:mathe_app/buttons_homescreen.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:mathe_app/home.dart';
-import 'package:mathe_app/lernteil.dart';
-import 'package:mathe_app/quiz/quiz.dart';
-import 'package:mathe_app/uebungsteil/uebungen.dart';
-
-import 'design_registry.dart';
+import 'package:mathe_app/index.dart';
 
 void main() => runApp(MyApp());
 
