@@ -1,8 +1,4 @@
-import 'dart:convert';
-
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:mathe_app/lernteil/viewing_lerninhalte.dart';
+import 'package:mathe_app/index.dart';
 
 class ListeLerninhalte extends StatefulWidget {
   ListeLerninhalte({Key key}) : super(key: key);
@@ -14,7 +10,7 @@ class ListeLerninhalte extends StatefulWidget {
 class _ListeLerninhalteState extends State<ListeLerninhalte> {
   
   Future<List<String>> _loadLerninhalteList() async {
-    String txt = await rootBundle.loadString('assets/Lerninhalte/liste_lerninhalte.txt');
+    String txt = await rootBundle.loadString('assets/data/liste_lerninhalte.txt');
     List <String> list = LineSplitter().convert(txt).toList();
     list.removeWhere((item) => item=="" || item==" ");
     return list;
@@ -24,7 +20,7 @@ class _ListeLerninhalteState extends State<ListeLerninhalte> {
   Widget makeCard(String heading, String subtitle) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => new AnsichtLerninhalt()));},
+        Navigator.push(context, MaterialPageRoute(builder: (context) => new AnsichtLerninhalt(topicTitle: heading)));},
       child: ClipRRect(
       // Radius der Kante des Schatten
       borderRadius: BorderRadius.circular(10.0),
