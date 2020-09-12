@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:mathe_app/index.dart';
 // import 'package:flutter_full_pdf_viewer/flutter_full_pdf_viewer.dart';
 import 'package:mathe_app/lernteil/liste_lerninhalte.dart';
 // import 'package:path_provider/path_provider.dart';
@@ -29,15 +30,36 @@ class _LernteilState extends State<Lernteil> {
     // return tempDocumentPath;
   }
 
+  BottomNaviBar bNaviBar;
+
+  @override
+  void initState() {
+    bNaviBar = BottomNaviBar();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Lernteil"),
+        backgroundColor: color_top_bar_app,
+        title: Text(
+          "Lernteil",
+          style: top_bar_text_style,
+        ),
+        // custom arrow back
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios), 
+          onPressed: () {
+            bNaviBar.pop();
+            // Navigator.of(context).pop();
+          },
+        )
       ),
       body: Container(
         child: ListeLerninhalte()
       ),
+      
+      bottomNavigationBar: bNaviBar,
     
     );
   }
