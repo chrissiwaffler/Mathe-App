@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:mathe_app/index.dart';
 
 /// background colors
 const color_background = Color.fromRGBO(208, 251, 246, 1);

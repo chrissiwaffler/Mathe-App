@@ -1,4 +1,3 @@
-import 'package:mathe_app/customs/custom_transition_routing.dart';
 import 'package:mathe_app/index.dart';
 
 class BottomNaviBar extends StatefulWidget {

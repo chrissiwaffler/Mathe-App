@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-
+import 'package:mathe_app/index.dart';
 
 
 const Color lernteil = Colors.lightBlue;

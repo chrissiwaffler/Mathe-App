@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:mathe_app/index.dart';
 
 class CustomTransition extends PageRouteBuilder {
   final Widget page;

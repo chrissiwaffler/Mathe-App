@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:mathe_app/index.dart';
 
 class Lernteil extends StatefulWidget {
   Lernteil({Key key}) : super(key: key);

@@ -1,11 +1,4 @@
-import 'dart:io';
-import 'dart:typed_data';
-
-import 'package:flutter/material.dart';
 import 'package:mathe_app/index.dart';
-// import 'package:flutter_full_pdf_viewer/flutter_full_pdf_viewer.dart';
-import 'package:mathe_app/lernteil/liste_lerninhalte.dart';
-// import 'package:path_provider/path_provider.dart';
 
 class Lernteil extends StatefulWidget {
   Lernteil({Key key}) : super(key: key);

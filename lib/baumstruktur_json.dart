@@ -1,8 +1,4 @@
-import 'dart:async';
-import 'dart:convert';
-
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
+import 'package:mathe_app/index.dart';
 
 class JsonLoader {
   final String jsonName;
