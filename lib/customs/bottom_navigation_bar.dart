@@ -9,8 +9,8 @@ class BottomNaviBar extends StatefulWidget {
     return bns.getCurrentContent();
   }
 
-  void pop() {
-    bns.pop();
+  void goHome() {
+    bns.goHome();
   }
 
   @override
@@ -18,8 +18,6 @@ class BottomNaviBar extends StatefulWidget {
 }
 
 class _BottomNaviBarState extends State<BottomNaviBar> {
-  
-
   
   static const double buttom_bar_fontsize = 24.0;
   static const double buttom_bar_icon_size = 40.0;
@@ -38,6 +36,11 @@ class _BottomNaviBarState extends State<BottomNaviBar> {
   Widget currentBody;
 
   static List<int> _history = [0];
+
+  bool isHorizontal() {
+    Orientation currentOrientation = MediaQuery.of(context).orientation;
+    return currentOrientation == Orientation.landscape ? true : false;
+  }
 
   @override
   void initState() {
@@ -80,6 +83,10 @@ class _BottomNaviBarState extends State<BottomNaviBar> {
     return _tabs[_selectedIndex];
   }
 
+  void goHome() {
+    _onItemTapped(0);
+  }
+
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
@@ -91,6 +98,8 @@ class _BottomNaviBarState extends State<BottomNaviBar> {
       // selectedItemColor: Colors.black,
       unselectedFontSize: buttom_bar_fontsize,
 
+      showSelectedLabels: isHorizontal(),
+      showUnselectedLabels: isHorizontal(),
 
       unselectedItemColor: Color.fromRGBO(0, 0, 0, 0.5),
       items: const <BottomNavigationBarItem>[
