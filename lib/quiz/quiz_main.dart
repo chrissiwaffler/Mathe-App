@@ -1,8 +1,8 @@
 import 'package:mathe_app/index.dart';
 
 class Quiz extends StatefulWidget {
-  Quiz(): super();
-
+  Quiz({this.childWidget}): super();
+  final Widget childWidget;
   @override
   _QuizState createState() => _QuizState();
 }
@@ -10,11 +10,23 @@ class Quiz extends StatefulWidget {
 class _QuizState extends State<Quiz> {
   BottomNaviBar bNaviBar;
 
+  Widget childWidget;
+
+
+  static const String mainPath = "assets/data/quiz/";
+
   @override
   void initState() {
     bNaviBar = BottomNaviBar();
-  }
 
+    if (widget.childWidget == null) {
+      childWidget = ListeQuizinhalte1(
+        topicsPath: "liste_quizinhalte.txt",
+        mainPath: mainPath,
+        schwierigkeitenPath: "schwierigkeitsstufen.txt",
+      );
+    } else childWidget = widget.childWidget;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,11 +44,21 @@ class _QuizState extends State<Quiz> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios), 
           onPressed: () {
-            bNaviBar.pop();
+            if (widget.childWidget == null) {
+              bNaviBar.goHome();
+            } else {
+              Navigator.pop(context);
+            }
+            
+            // Navigator.push(context, CustomTransition(page: HomeScreen()));
             // Navigator.of(context).pop();
           },
         ) 
       ),
+
+      // TODO rewrite 'AnsichtLerninhalte()'
+      body: childWidget,
+
 
       bottomNavigationBar: bNaviBar,
     

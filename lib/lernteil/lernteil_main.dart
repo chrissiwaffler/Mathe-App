@@ -1,7 +1,7 @@
 import 'package:mathe_app/index.dart';
 
 class Lernteil extends StatefulWidget {
-  Lernteil({Key key}) : super(key: key);
+  Lernteil() : super();
 
   @override
   _LernteilState createState() => _LernteilState();
@@ -9,6 +9,8 @@ class Lernteil extends StatefulWidget {
 
 class _LernteilState extends State<Lernteil> {
   String _documentPath = 'assets/PDFs/HandoutInformatiker.pdf';
+
+  static const  String mainPath = "assets/data/lernteil/";
 
   Future<String> prepareTestPdf() async {
     final ByteData bytes =
@@ -43,14 +45,17 @@ class _LernteilState extends State<Lernteil> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios), 
           onPressed: () {
-            bNaviBar.pop();
+            // bNaviBar.pop();
+            bNaviBar.goHome();
             // Navigator.of(context).pop();
           },
         )
       ),
       body: Container(
-        child: ListeLerninhalte()
+        child: ListeLerninhalte(txt: "liste_lerninhalte.txt", child: AnsichtLerninhalt(), mainPath: mainPath,)
       ),
+
+      backgroundColor: color_background,
       
       bottomNavigationBar: bNaviBar,
     
