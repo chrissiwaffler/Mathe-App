@@ -7,7 +7,7 @@ class TxtFileLoader {
   Future<List<List<String>>>loadWithSites(String fullPath) async {
     fullPath = cleanFilePath(fullPath);
 
-    String txt = await rootBundle.loadString('$fullPath.txt');
+    String txt = await rootBundle.loadString('$fullPath');
 
     List<String> sites = txt.split("</s>");
 
@@ -23,15 +23,17 @@ class TxtFileLoader {
   // load a txt-file without any refactoring
   Future<String> loadBasic(String fullPath) async {
     fullPath = cleanFilePath(fullPath);
-    String txt = await rootBundle.loadString('$fullPath.txt');
+    String txt = await rootBundle.loadString('$fullPath');
     return txt;
   }
 
-  Future<List<String>> loadSplittedLines(String fullPath) async {
+  // load the given txt-file and split the different lines 
+  // optional: remove the empty lines (via the paramter: 'removingEmptyLines=true')
+  Future<List<String>> loadSplittedLines(String fullPath, bool removingEmptyLines) async {
     fullPath = cleanFilePath(fullPath);
     String txt = await rootBundle.loadString(fullPath);
     List <String> list = LineSplitter().convert(txt).toList();
-    list.removeWhere((item) => item=="" || item==" ");
+    if (removingEmptyLines) list.removeWhere((item) => item=="" || item==" ");
     return list;
   }
 
