@@ -13,6 +13,14 @@ class BottomNaviBar extends StatefulWidget {
     bns.goHome();
   }
 
+  void goLerning() {
+    bns.goLearning();
+  }
+
+  void goStudy() {
+    bns.goStudy();
+  }
+
   @override
   _BottomNaviBarState createState() => bns = _BottomNaviBarState();
 }
@@ -27,6 +35,7 @@ class _BottomNaviBarState extends State<BottomNaviBar> {
     fontSize: buttom_bar_fontsize
   );
 
+  final _bap = BackgroundAudioPlayer();
 
   // für die Navigationsleiste unten
   static int _selectedIndex = 0;
@@ -51,6 +60,13 @@ class _BottomNaviBarState extends State<BottomNaviBar> {
     setState(() {
       currentBody = _tabs[_selectedIndex];
     });
+
+    // falls die Home (Startseite) aktuell zu sehen ist, soll Hintergrundmusik abgespielt werden
+    if (_selectedIndex == 0) {
+      _bap.play();
+    } else {
+      _bap.pause();
+    }
   }
 
   void pop() {
@@ -85,6 +101,14 @@ class _BottomNaviBarState extends State<BottomNaviBar> {
 
   void goHome() {
     _onItemTapped(0);
+  }
+
+  void goLearning() {
+    _onItemTapped(1);
+  }
+
+  void goStudy() {
+    _onItemTapped(2);
   }
 
   @override
@@ -123,4 +147,9 @@ class _BottomNaviBarState extends State<BottomNaviBar> {
       onTap: _onItemTapped,
     );
   }
+
+  // @override
+  // void dispose() {
+    
+  // }
 }
