@@ -37,7 +37,11 @@ class TxtFileLoader {
     return list;
   }
 
-
+  Future<List<String>> loadHtmlWithImages(String fullPath) async {
+    String txt = await loadBasic(fullPath);
+    List<String> listTexts = txt.split("<image>");
+    return listTexts;
+  }
 
 
   // refactor the String to have 1 '.txt' ending

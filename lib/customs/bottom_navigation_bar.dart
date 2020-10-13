@@ -40,7 +40,9 @@ class _BottomNaviBarState extends State<BottomNaviBar> {
   // für die Navigationsleiste unten
   static int _selectedIndex = 0;
 
-  final List<Widget> _tabs = [HomeScreen(), Lernteil(), Quiz(), Settings()];
+  // final List<Widget> _tabs = [HomeScreen(), Lernteil(), Quiz(), Profil()];
+  final List<Widget> _tabs = [HomeScreen(), Lernteil(), Quiz()];
+
 
   Widget currentBody;
 
@@ -56,16 +58,18 @@ class _BottomNaviBarState extends State<BottomNaviBar> {
     updateCurrentBody();
   }
 
-  void updateCurrentBody() {
+  Future<void> updateCurrentBody() async {
     setState(() {
       currentBody = _tabs[_selectedIndex];
     });
 
     // falls die Home (Startseite) aktuell zu sehen ist, soll Hintergrundmusik abgespielt werden
     if (_selectedIndex == 0) {
-      _bap.play();
+      print("playy");
+      await _bap.play();
     } else {
-      _bap.pause();
+      print("pausee");
+      await _bap.pause();
     }
   }
 
@@ -139,9 +143,9 @@ class _BottomNaviBarState extends State<BottomNaviBar> {
             icon: ImageIcon(AssetImage("assets/images/ExerciseIcon.png"), size: buttom_bar_icon_size-7), 
             title: Text("Üben", style: textstyle_buttom_bar,)),
 
-        BottomNavigationBarItem(
-            icon: ImageIcon(AssetImage("assets/images/SettingsIcon.png"), size: buttom_bar_icon_size),
-            title: Text("Einstellungen", style: textstyle_buttom_bar))
+        // BottomNavigationBarItem(
+        //     icon: ImageIcon(AssetImage("assets/images/SettingsIcon.png"), size: buttom_bar_icon_size),
+        //     title: Text("Einstellungen", style: textstyle_buttom_bar))
       ],
       currentIndex: _selectedIndex,
       onTap: _onItemTapped,

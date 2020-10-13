@@ -1,4 +1,4 @@
-package com.example.mathe_app
+package com.gymbei.mathe_app
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

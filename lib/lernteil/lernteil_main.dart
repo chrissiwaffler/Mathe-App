@@ -42,17 +42,18 @@ class _LernteilState extends State<Lernteil> {
           style: top_bar_text_style,
         ),
         // custom arrow back
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios), 
-          onPressed: () {
-            // bNaviBar.pop();
-            bNaviBar.goHome();
-            // Navigator.of(context).pop();
-          },
-        )
+        // leading: IconButton(
+        //   icon: Icon(Icons.arrow_back_ios), 
+        //   onPressed: () {
+        //     // bNaviBar.pop();
+        //     bNaviBar.goHome();
+        //     // Navigator.of(context).pop();
+        //   },
+        // )
+        leading: Container(),
       ),
       body: Container(
-        child: ListeLerninhalte(txt: "liste_lerninhalte.txt", child: AnsichtLerninhalt(), mainPath: mainPath,)
+        child: ListeLerninhalte(txt: "liste_lerninhalte.txt", mainPath: mainPath,)
       ),
 
       backgroundColor: color_background,

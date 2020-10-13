@@ -87,13 +87,21 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget learningPart() {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      // mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        textLearningPart(), 
-        imageLearningStudent()
-      ],
+    return GestureDetector(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        // mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          textLearningPart(), 
+          imageLearningStudent()
+        ],
+      ),
+
+      onTap: () {
+        bNaviBar.goLerning();
+      },
+
+      // onPanDown: ,
     );
   }
 
@@ -125,12 +133,18 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget excersicePart() {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        textExcersicePart(),
-        imageExcersiceStudent()
-      ],
+    return GestureDetector(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          textExcersicePart(),
+          imageExcersiceStudent()
+        ],
+      ),
+
+      onTap: () {
+        bNaviBar.goStudy();
+      },
     );
   }
 
@@ -159,10 +173,12 @@ class _HomeScreenState extends State<HomeScreen> {
           textAlign: TextAlign.center,
         ),
 
-        leading: Padding(
-          padding: EdgeInsets.only(left: 20.0),
-          child: ImageIcon(AssetImage("assets/images/PiSymbol.png"),
-            size: 20)),
+        // no Leading Icon
+        // leading: Padding(
+        //   padding: EdgeInsets.only(left: 20.0),
+        //   child: ImageIcon(AssetImage("assets/images/PiSymbol.png"),
+        //     size: 20)),
+        leading: Container(),
       ),
 
       body: Column(

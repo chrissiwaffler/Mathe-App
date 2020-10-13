@@ -3,29 +3,31 @@ import 'package:mathe_app/index.dart';
 // Implementation als Singelton
 class BackgroundAudioPlayer {
   static final BackgroundAudioPlayer _backgroundAudioPlayer = BackgroundAudioPlayer._internal();
-  final AssetsAudioPlayer aap = AssetsAudioPlayer();
+  final AssetsAudioPlayer aap = AssetsAudioPlayer.withId("0");
   final String assetsPath = "assets/music/";
 
   String currentSong;
 
   factory BackgroundAudioPlayer() {
     _backgroundAudioPlayer.updateSettings();
-    _backgroundAudioPlayer.play();
+    // _backgroundAudioPlayer.pause();
     return _backgroundAudioPlayer;
   }
 
   BackgroundAudioPlayer._internal();
 
-  void playOrPause() {
-    aap.playOrPause();
+  Future<void> playOrPause() async {
+    await aap.playOrPause();
   }
 
-  void pause() {
-    aap.pause();
+  Future<void> pause() async {
+    print("pause");
+    await aap.pause();
   }
 
-  void play() {
-    aap.play();
+  Future<void> play() async {
+    print("play");
+    await aap.play();
   }
 
   Future<void> updateSettings() async {
@@ -34,7 +36,9 @@ class BackgroundAudioPlayer {
     aap.open(
       Audio(
         assetsPath + currentSong + ".mp3"
-      )
+      ),
+      autoStart: false,
     );
+    // aap.pause();
   }
 }

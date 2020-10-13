@@ -6,12 +6,18 @@ const color_hintergrund_lernteil = Color.fromRGBO(255, 236, 236, 1);
 
 /// Color of widgets
 /// Color of Buttons
-const color_button_lernteil = Color.fromRGBO(214, 249, 245, 1);
+// const color_button_lernteil = Color.fromRGBO(214, 249, 245, 1);
+// const color_button_lernteil = Color.fromRGBO(255, 255, 190, 0.87);
+// const color_button_lernteil = Color.fromRGBO(255, 190, 255, 0.87);
+const color_button_lernteil = Color.fromRGBO(130, 242, 231, 0.90);
+
 
 
 /// study part list
 const color_list_arrow = Color.fromRGBO(255, 152, 152, 1);
 const color_list_font_color = Color.fromRGBO(38, 36, 36, 0.87);
+
+const color_left_border_list_text = color_top_bar_app;
 
 /// TopBar
 const color_top_bar_app = Color.fromRGBO(18, 196, 178, 1);
