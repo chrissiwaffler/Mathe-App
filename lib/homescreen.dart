@@ -187,7 +187,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Padding(
               padding: const EdgeInsets.only(top: 30.0, bottom: 40.0, left: 20.0, right: 20.0),
               child: Text(
-                "Mathematik App für die 10. Klasse des Gymnasiums",
+                "Mathematik App 10. Klasse Gymnasium",
                 style: TextStyle(
                   color: Colors.black,
                   fontFamily: "SF Pro Custom",
