@@ -28,6 +28,7 @@ export 'package:mathe_app/services/audio_player_background.dart';
 export 'package:mathe_app/services/helper.dart';
 export 'package:mathe_app/quiz/view/view_multiple_choice.dart';
 export 'package:mathe_app/services/load_html.dart';
+export 'package:mathe_app/services/exception_widgets.dart';
 
 
 
