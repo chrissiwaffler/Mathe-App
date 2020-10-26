@@ -5,7 +5,7 @@ class MultipleChoice extends QuizViewingTemplate {
 
   final String textPath;
 
-  static _MultipleChoiceState _mcs;
+  _MultipleChoiceState _mcs;
 
 
   @override
@@ -20,10 +20,10 @@ class MultipleChoice extends QuizViewingTemplate {
 class _MultipleChoiceState extends State<MultipleChoice> {
   String aufgabenText;
 
-  List<String> auswahlMoeglichkeiten;
-  int indexRichtig;
-  List<bool> auswahlMoeglichkeitenSelected;
-  List<int> auswahlMoeglichkeitenFarbe;
+  List<String> _auswahlMoeglichkeiten;
+  int _indexRichtig;
+  List<bool> _auswahlMoeglichkeitenSelected;
+  List<int> _auswahlMoeglichkeitenFarbe;
 
   // converting the number 1 -> A, 2 -> B, etc.
   String getStringFromNumber(int number) {
@@ -55,30 +55,37 @@ class _MultipleChoiceState extends State<MultipleChoice> {
     int numMoeglichkeiten = int.parse(list[akt]);
     akt++;
 
-    auswahlMoeglichkeiten = List<String>(numMoeglichkeiten);
+    _auswahlMoeglichkeiten = List<String>(numMoeglichkeiten);
     for (int i = 0; i < numMoeglichkeiten; ++i) {
-      auswahlMoeglichkeiten[i] = list[akt + i];
+      _auswahlMoeglichkeiten[i] = list[akt + i];
     }
     akt += numMoeglichkeiten;
 
     if (list[akt].contains("r:")) {
-      indexRichtig = int.parse(list[akt + 1])-1;
+      _indexRichtig = int.parse(list[akt + 1])-1;
     }
 
-    auswahlMoeglichkeitenSelected = new List<bool>(numMoeglichkeiten);
-    auswahlMoeglichkeitenSelected.forEach((element) {element=false;});
+    _auswahlMoeglichkeitenSelected = List<bool>(numMoeglichkeiten);
+    _auswahlMoeglichkeitenFarbe = List<int>(numMoeglichkeiten);
+
+    // auswahlMoeglichkeitenSelected.forEach((element) {element=false;});
+
     
-    auswahlMoeglichkeitenFarbe = new List<int>(numMoeglichkeiten);
-    auswahlMoeglichkeitenFarbe.forEach((element) {element = 0;});
+    // auswahlMoeglichkeitenFarbe.forEach((element) {element = 0;});
+
+    for (int i = 0; i < numMoeglichkeiten; ++i) {
+      _auswahlMoeglichkeitenSelected[i] = false;
+      _auswahlMoeglichkeitenFarbe[i] = 0;
+    }
 
     // State wird neu gesetzt
     setState(() {
       this.aufgabenText = aufgabenText;
-      this.auswahlMoeglichkeiten = auswahlMoeglichkeiten;
-      this.indexRichtig = indexRichtig;
+      this._auswahlMoeglichkeiten = _auswahlMoeglichkeiten;
+      this._indexRichtig = _indexRichtig;
 
-      this.auswahlMoeglichkeitenSelected = auswahlMoeglichkeitenSelected;
-      this.auswahlMoeglichkeitenFarbe = auswahlMoeglichkeitenFarbe;
+      this._auswahlMoeglichkeitenSelected = _auswahlMoeglichkeitenSelected;
+      this._auswahlMoeglichkeitenFarbe = _auswahlMoeglichkeitenFarbe;
     });
 
     // eventuell bestehende Werte laden
@@ -89,17 +96,17 @@ class _MultipleChoiceState extends State<MultipleChoice> {
 
   bool validateInput() {
     bool returnValue = false;
-    for (int i = 0; i < this.auswahlMoeglichkeitenSelected.length; i++) {
-      if (this.auswahlMoeglichkeitenSelected[i] != null) {
-        if (this.auswahlMoeglichkeitenSelected[i]) {
-          if (i == this.indexRichtig) {
+    for (int i = 0; i < this._auswahlMoeglichkeitenSelected.length; i++) {
+      if (this._auswahlMoeglichkeitenSelected[i] != null) {
+        if (this._auswahlMoeglichkeitenSelected[i]) {
+          if (i == this._indexRichtig) {
             // richtige Antwort ausgewählt
-            setState(() => this.auswahlMoeglichkeitenFarbe[i] = 1);
+            setState(() => this._auswahlMoeglichkeitenFarbe[i] = 1);
             returnValue = true;
             break;
           } else {
             // falsche Antwort ausgewählt
-            setState(() => this.auswahlMoeglichkeitenFarbe[i] = -1);
+            setState(() => this._auswahlMoeglichkeitenFarbe[i] = -1);
             returnValue = false;
             break;
           }
@@ -115,11 +122,11 @@ class _MultipleChoiceState extends State<MultipleChoice> {
 
   Future<void> saveValues() async {
     var prefs = await SharedPreferences.getInstance();
-    for (int i = 0; i < this.auswahlMoeglichkeitenSelected.length; i++) {
-      if (this.auswahlMoeglichkeitenSelected[i] != null) {
-        if (this.auswahlMoeglichkeitenSelected[i]) {
+    for (int i = 0; i < this._auswahlMoeglichkeitenSelected.length; i++) {
+      if (this._auswahlMoeglichkeitenSelected[i] != null) {
+        if (this._auswahlMoeglichkeitenSelected[i]) {
           // ausgewählte Antwort wird gespeichert
-          int isRight = this.auswahlMoeglichkeitenFarbe[i];
+          int isRight = this._auswahlMoeglichkeitenFarbe[i];
 
           // Werte werden gespeichert
           await prefs.setStringList(widget.textPath, [i.toString(), isRight.toString()]);
@@ -139,8 +146,8 @@ class _MultipleChoiceState extends State<MultipleChoice> {
         int isRight = int.parse(l[1]);
 
         setState(() {
-          this.auswahlMoeglichkeitenSelected[feld] = true;
-          this.auswahlMoeglichkeitenFarbe[feld] = isRight;
+          this._auswahlMoeglichkeitenSelected[feld] = true;
+          this._auswahlMoeglichkeitenFarbe[feld] = isRight;
         });
       }
     }
@@ -149,14 +156,14 @@ class _MultipleChoiceState extends State<MultipleChoice> {
 
   // Antwortmöglichkeiten werden hier erstellt
   List<Widget> buildAnswers() {
-    int n = this.auswahlMoeglichkeiten.length;
+    int n = this._auswahlMoeglichkeiten.length;
     List<Widget> list = List<Widget>(n);
 
     for (int i = 0; i < n; ++i) {
       
       Widget listTile = ListTile(
         title: Text(
-          this.auswahlMoeglichkeiten[i],
+          this._auswahlMoeglichkeiten[i],
           style: TextStyle(
             fontFamily: "SF Pro Custom",
             fontSize: 25,
@@ -185,14 +192,14 @@ class _MultipleChoiceState extends State<MultipleChoice> {
       );
 
       Color color;
-      if (auswahlMoeglichkeitenSelected[i] != null) {
-        color = auswahlMoeglichkeitenSelected[i] ? Colors.blueAccent : Colors.grey[300];
+      if (_auswahlMoeglichkeitenSelected[i] != null) {
+        color = _auswahlMoeglichkeitenSelected[i] ? Colors.blueAccent : Colors.grey[300];
       } else color = Colors.grey[300];
 
       // die Antwort wurde überprüft
-      if (auswahlMoeglichkeitenFarbe[i] != 0 && auswahlMoeglichkeitenFarbe[i] != null) {
+      if (_auswahlMoeglichkeitenFarbe[i] != 0 && _auswahlMoeglichkeitenFarbe[i] != null) {
         // die Antwort ist nun entweder falsch oder richtig
-        if (auswahlMoeglichkeitenFarbe[i] < 0) {
+        if (_auswahlMoeglichkeitenFarbe[i] < 0) {
           // ausgewählte Antwort ist falsch
           color = Colors.redAccent;
         } else {
@@ -233,14 +240,14 @@ class _MultipleChoiceState extends State<MultipleChoice> {
 
   _onTapCard(int numberField) {
     print("selected: $numberField");
-    for (int i = 0; i < auswahlMoeglichkeitenSelected.length; ++i) {
+    for (int i = 0; i < _auswahlMoeglichkeitenSelected.length; ++i) {
       if (i != numberField) {
-        auswahlMoeglichkeitenSelected[i] = false;
-      } else auswahlMoeglichkeitenSelected[i] = true;
+        _auswahlMoeglichkeitenSelected[i] = false;
+      } else _auswahlMoeglichkeitenSelected[i] = true;
     } 
 
     setState(() {
-      this.auswahlMoeglichkeitenSelected = auswahlMoeglichkeitenSelected;
+      this._auswahlMoeglichkeitenSelected = _auswahlMoeglichkeitenSelected;
     });
   }
 
