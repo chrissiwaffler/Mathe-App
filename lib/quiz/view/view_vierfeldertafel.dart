@@ -5,7 +5,7 @@ class VierfelderTafel extends QuizViewingTemplate {
   final String textPath;
   final TextStyle textStyleVariables, textStyleInhalt;
 
-  static _VierfelderTafelState _vft;
+  _VierfelderTafelState _vft;
 
   String getDefinitionen() {
     return _vft.definitionen;
@@ -190,6 +190,7 @@ class _VierfelderTafelState extends State<VierfelderTafel> {
       return Container(
         padding: felderPadding,
         // decoration: getBorderLine(r: r, l: l, b: b, t: t, color: color),
+        color: color,
         child: inputField,
       );
     }
