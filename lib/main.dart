@@ -7,6 +7,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Mathe App',
       theme: ThemeData(
           primarySwatch: Colors.blue,
@@ -16,8 +17,10 @@ class MyApp extends StatelessWidget {
           textTheme: GoogleFonts.expletusSansTextTheme(
             Theme.of(context).textTheme,
           )),
+
+      // ? Hier auf SplashScreen() wechseln, um die SplashScreen Animation anzuzeigen
       home: Home(),
       
-    );
+    );  
   }
 }

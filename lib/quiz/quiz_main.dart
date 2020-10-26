@@ -71,11 +71,15 @@ class _QuizState extends State<Quiz> {
               return {"Reset"}.map((String choice) {
                 return PopupMenuItem<String>(
                   value: choice,
-                  child: Text(choice, style: TextStyle(fontFamily: "SF Pro Custom"),)
+                  child: Text(choice, style: TextStyle(fontFamily: "SF Pro Custom", fontSize: 25))
                 );
               }).toList();
-            }
-          )
+            },
+
+            icon: Icon(Icons.more_horiz, 
+              size: 30,
+              )
+            ),
         ],
       ),
 

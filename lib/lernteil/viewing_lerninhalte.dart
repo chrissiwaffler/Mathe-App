@@ -3,18 +3,10 @@ import 'package:mathe_app/index.dart';
 import 'package:mathe_app/website_viewer_geht_nicht.dart';
 
 class AnsichtLerninhalt extends StatefulWidget {
-  AnsichtLerninhalt() : super();
+  AnsichtLerninhalt({this.topicTitle, this.mainPath}) : super();
 
-  String topicTitle;
-  String mainPath;
-
-  void setTopicTitle(String t) {
-    topicTitle = t;
-  }
-
-  void setMainPath(String m) {
-    mainPath = m;
-  }
+  final String topicTitle;
+  final String mainPath;
 
   @override
   _AnsichtLerninhaltState createState() => _AnsichtLerninhaltState();
@@ -22,15 +14,10 @@ class AnsichtLerninhalt extends StatefulWidget {
 
 class _AnsichtLerninhaltState extends State<AnsichtLerninhalt> {
 
-  // Name des Themengebiets
-  // String topicTitle;
-
   int _currentPage, _maxPages;
   bool _nextPage;
 
   static BottomNaviBar bNaviBar;
-
-  // _AnsichtLerninhaltState({this.topicTitle});
   
   @override
   void initState() { 
@@ -41,11 +28,13 @@ class _AnsichtLerninhaltState extends State<AnsichtLerninhalt> {
     _scrollController = ScrollController();
   }
 
+  /// Widget zum Anzeigen der Überschrift (Titel des aktuellen Lernthemas)
   Widget title() {
     return Padding(
         padding: const EdgeInsets.only(left: 20),
         child: FittedBox(
           child: Text(
+            // Attribut vom Widget (Titel des Topics) wird als Text angezeigt
             widget.topicTitle,
             style: TextStyle(
               color: Colors.black,
@@ -58,44 +47,17 @@ class _AnsichtLerninhaltState extends State<AnsichtLerninhalt> {
     );
   }
 
-  Future<String> _loadLerninhalteString() async {
-    String txt = await rootBundle.loadString('${widget.mainPath}${widget.topicTitle}.txt');
-    // List <String> list = LineSplitter().convert(txt).toList();
-    return txt;
-  }
-
+  /// Laden des Textes der Lerneinheit aus einer Textdatei, die mit '</s>' nach Seiten sortiert ist
   Future<List<List<String>>> _loadLerninhalteList() async {
-    // String txt = await rootBundle.loadString('${widget.mainPath}${widget.topicTitle}.txt');
-
-    // List<String> sites = txt.split("</s>");
-
-    // List<List<String>> sites_lines = [];
-    // sites.forEach((site) {
-    //   List<String> lines = LineSplitter().convert(site).toList();
-    //   sites_lines.add(lines);
-    // });
-
-    List<List<String>> sites_lines = await TxtFileLoader().loadWithSites("${widget.mainPath}${widget.topicTitle}.txt");
-
-
-    // List<String> list = LineSplitter().convert(txt).toList();
-    // list.removeWhere((element) => element == "\s");
+    // Laden aller einzelnen Seiten
+    List<List<String>> sitesLines = await TxtFileLoader().loadWithSites("${widget.mainPath}${widget.topicTitle}.txt");
 
     setState(() {
-      _maxPages = sites_lines.length;
+      _maxPages = sitesLines.length;
       if (_maxPages > 1 && _currentPage < _maxPages-1) _nextPage = true; else _nextPage = false;
     });
-    return sites_lines;
 
-    // setState(() {
-    //   _maxPages = list.length;
-    //   if (_maxPages > 1 && _currentPage < _maxPages-1) {
-    //     _nextPage = true;
-    //   } else {
-    //     _nextPage = false;
-    //   }
-    // });
-    // return list;
+    return sitesLines;
   }
 
   Widget currentSiteText() {
@@ -103,32 +65,28 @@ class _AnsichtLerninhaltState extends State<AnsichtLerninhalt> {
       future: _loadLerninhalteList(),
       builder: (context, AsyncSnapshot<List<List<String>>> snapshot) {
         if (snapshot.hasError) {
-          // TODO return: show error widget
+          // Fehlermeldung wird angezeigt
+          return ExceptionWidgets().txtLoadingError(text: "${widget.mainPath} ${widget.topicTitle}");        
         }
       List<List<String>> sitesLines = snapshot.data ?? "";
 
-    // List<List<String>> sitesLines = await _loadLerninhalteList();
-
-      List<Widget> list_texts_current_site = [];
-
-      // for (int i = 0; i < sitesLines[_currentPage].length; ++i) {        
-      // }
+      List<Widget> listTextsCurrentSite = [];
 
       sitesLines[_currentPage].forEach((line) {
+        // falls ein Bild eingefügt werden soll, wird dies eingefügt
         if (line.contains(".png")) {
-          list_texts_current_site.add(getImage(line));
+          listTextsCurrentSite.add(getImage(line));
         } else {
           List<TextSpan> lineNewWords = List();
           line.split(" ").forEach((word) {
-            bool underline2 = false;
-            var kle = line.split(" ");
-            int cur_index = kle.indexOf(word);
-            if (cur_index < kle.length-1) {
-              if (kle[cur_index+1].contains("<u>")) {
-                underline2 = true;
-              }
-            }
 
+            // Überprüfen, ob das nächste Wort auch unterstrichen sein soll
+            bool underline2 = false;
+            var subList = line.split(" ");
+            int currentIndex = subList.indexOf(word);
+            if (currentIndex < subList.length-1) {
+              underline2 = subList[currentIndex+1].contains("<u>");
+            }
 
             bool bold = false;
             bool underline = false;
@@ -141,6 +99,7 @@ class _AnsichtLerninhaltState extends State<AnsichtLerninhalt> {
               underline = true;
             }
 
+            // neues Wort wird mit der gewünschten Formatierung erstellt
             lineNewWords.add(TextSpan(
               text: word,
               style: TextStyle(
@@ -152,12 +111,11 @@ class _AnsichtLerninhaltState extends State<AnsichtLerninhalt> {
               )
             ));
 
-            
-            // if (line.split(" ").toList()[line.split(" ").toList().indexOf(word) + 1].contains("<u>")) underline2 = true;
-            // Hinzufügen eines Leerzeichens
+            // Hinzufügen eines Leerzeichens am Ende des aktuellen Wortes
             lineNewWords.add(TextSpan(
               text: " ",
               style: TextStyle(
+                // das Leerzeichen ist ggf. unterstrichen (ja, falls das nächste Wort auch unterstrichen sein soll)
                 decoration: underline2 ? TextDecoration.underline : TextDecoration.none,
                 fontSize: 30,
                 fontFamily: "SF Pro Custom",
@@ -167,7 +125,8 @@ class _AnsichtLerninhaltState extends State<AnsichtLerninhalt> {
             ));
           });
 
-          list_texts_current_site.add(
+          // RichText wird erstellt und zur Liste hinzugefügt
+          listTextsCurrentSite.add(
             RichText(
               text: TextSpan(
                 children: lineNewWords,
@@ -177,89 +136,16 @@ class _AnsichtLerninhaltState extends State<AnsichtLerninhalt> {
         }
       });
 
+      // neue Spalte wird erstellt und zurückgegeben
       return Column(
-        children: list_texts_current_site,
+        children: listTextsCurrentSite,
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
       );
     });
-
-    // return FutureBuilder(
-    //   future: _loadLerninhalteList(),
-    //   builder: (context, AsyncSnapshot<List<List<String>>> snapshot) {
-    //     if (snapshot.hasError) {
-    //       // TODO return: show error widget
-    //     }
-
-    //     List<List<String>> sites_lines = snapshot.data ?? "";
-        
-    //     return Container(
-    //       child: Text(
-    //         textList[_currentPage], 
-    //         style: TextStyle(
-    //           fontSize: 30,
-    //           fontFamily: "SF Pro Custom",
-    //           fontWeight: FontWeight.normal,
-    //           color: Colors.black,
-    //         ),
-    //       ),
-
-    //     );
-    //   },
-    // );
   }
-  
-  // Widget currentSiteText() {
-  //   Widget childWidget = HtmlLoader(
-  //     mainPath: widget.mainPath,
-  //     topicTitle: widget.topicTitle,
-  //     context: context, 
-  //     fontSize: 20, 
-  //     fontWeight: FontWeight.normal, 
-      
-  //   ).getHtmlWidget();
 
-  //   return childWidget;
-  // }
-
-  // Widget currentSiteText() {
-  //   List<Widget> widgetsList = List<Widget>();
-  //   // TODO hier weiter
-  //   return FutureBuilder(
-  //     future: TxtFileLoader().loadHtmlWithImages('${widget.mainPath}${widget.topicTitle}.txt'),
-  //     builder: (context, AsyncSnapshot <List<String>> snapshot) {
-        
-  //       List<String> listTexts = snapshot.data ?? [];
-  //       print("0");
-  //       listTexts.forEach((element) {
-  //         if (element.contains("1.png")) {
-  //           // load and display photo
-  //           widgetsList.add(getImage(element));
-  //         } else {
-  //           widgetsList.add(HtmlLoader(
-  //             context: context, 
-  //             fontSize: 20, 
-  //             fontWeight: FontWeight.normal,
-  //             text: element 
-              
-  //           ).getHtmlWidget());
-  //         }
-
-  //         widgetsList.add(SizedBox(height: 20));
-  //       });
-
-  //       return Column(
-  //         children: widgetsList,
-  //       );
-  //       // return childWidget;
-  //     }
-  //   );
-
-  //   // return childWidget;
-
-  //   // return HelpScreen();
-  // }
-
+  // Bild wird geladen und angepasst zurückgegeben
   Widget getImage(String name) {
     return Image(
       image: AssetImage("assets/data/lernteil/$name"), 
@@ -267,6 +153,7 @@ class _AnsichtLerninhaltState extends State<AnsichtLerninhalt> {
     );
   }
   
+  // check, ob Tablet gerade horizontal oder vertikal ist
   bool isHorizontal() {
     Orientation currentOrientation = MediaQuery.of(context).orientation;
     return currentOrientation == Orientation.landscape ? true : false;
@@ -274,7 +161,7 @@ class _AnsichtLerninhaltState extends State<AnsichtLerninhalt> {
   
   /// define the maximum height and width of the container with the text
   double textBoxMaxHeight() {
-    double factor = isHorizontal() ? 0.55 : 0.65; 
+    double factor = isHorizontal() ? 0.60 : 0.70; 
     return MediaQuery.of(context).size.height * factor;
   }
 

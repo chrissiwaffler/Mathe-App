@@ -29,6 +29,11 @@ export 'package:mathe_app/services/helper.dart';
 export 'package:mathe_app/quiz/view/view_multiple_choice.dart';
 export 'package:mathe_app/services/load_html.dart';
 export 'package:mathe_app/services/exception_widgets.dart';
+export 'package:mathe_app/xd_splash_animation/splash1.dart';
+export 'package:mathe_app/xd_splash_animation/splash2.dart';
+export 'package:mathe_app/xd_splash_animation/splash3.dart';
+export 'package:mathe_app/xd_splash_animation/splash_screen_main.dart';
+
 
 
 
@@ -46,6 +51,9 @@ export 'package:flutter_html/flutter_html.dart';
 export 'package:flutter_html/html_parser.dart';
 export 'package:flutter_html/style.dart';
 export 'package:flutter/services.dart';
+export 'package:adobe_xd/adobe_xd.dart';
+
+
 // export 'package:webview_flutter/webview_flutter.dart';
 
 // export 'package:path_provider/path_provider.dart';

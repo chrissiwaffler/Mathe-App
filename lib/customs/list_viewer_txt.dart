@@ -36,9 +36,7 @@ class _ListeLerninhalteState extends State<ListeLerninhalte> {
 
   Widget createChild(String heading, String subtitle) {
     AnsichtLerninhalt childWidget;
-    childWidget = AnsichtLerninhalt();
-    childWidget.setTopicTitle(heading);
-    childWidget.setMainPath(widget.mainPath);
+    childWidget = AnsichtLerninhalt(topicTitle: heading, mainPath: widget.mainPath);
     return childWidget;
   }
 
