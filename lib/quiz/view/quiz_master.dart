@@ -151,6 +151,17 @@ class _QuizMasterState extends State<QuizMaster> {
     );
   }
 
+  // Bild wird geladen und angepasst zurückgegeben
+  Widget getImage(String name) {
+    return Container(
+      margin: EdgeInsets.only(left: 15.0),
+      child: Image(
+        image: AssetImage("assets/data/quiz/$name"), 
+        width: MediaQuery.of(context).size.width*0.4,
+      ),
+    );
+  }
+
   Widget teilaufgabeHeading(int nummer) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 5.0),
@@ -200,7 +211,23 @@ class _QuizMasterState extends State<QuizMaster> {
       // fügt alle Textzeilen als Widget hinzu, die zur Aufgabenstellung gehören
       List<String> listAufgabenText = await loadTextAfterKeyword(widget.mainPath+widget.textPath, "text");
 
+      Widget image;
+      for (int i = 0; i < listAufgabenText.length; ++i) {
+        if (listAufgabenText[i].contains(".png") || listAufgabenText[i].contains(".PNG")) {
+          image = getImage(listAufgabenText[i]);
+          listAufgabenText.removeAt(i);
+        }
+      }
+
       setState(() => this.widgets.add(buildAufgabenText(listAufgabenText)));
+
+      if (image != null) {
+        setState(() {
+          this.widgets.add(image);
+          this.widgets.add(SizedBox(height: 10));
+        });
+
+      }
 
       // ladet alle Nummern der Teilaufgaben, die angegeben sind (nach dem Wort)
       List<String> listTeilaufgabenNummern = await loadTextAfterKeyword(widget.mainPath+widget.textPath, "task");
