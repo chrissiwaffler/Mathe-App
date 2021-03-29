@@ -14,10 +14,11 @@ class SettingsNoState {
   Widget resetPopup() {
     return CupertinoAlertDialog(
       title: Text(
-        "Alle Zwischenstände im Quiz-Teil und alle Einstellungen werden zurückgesetzt!",
+        // "Alle Zwischenstände im Quiz-Teil und alle Einstellungen werden zurückgesetzt!",
+        "Alle Zwischenstände im Quiz-Teil werden zurückgesetzt!",
         style: TextStyle(
           fontFamily: "SF Pro Custom",
-          fontSize: 15,
+          fontSize: 20,
         )
       ),
 

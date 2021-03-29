@@ -48,7 +48,7 @@ class _QuizMasterState extends State<QuizMaster> {
 
   Widget topic() {
     return Padding(
-        padding: const EdgeInsets.only(left: 20.0, bottom: 20.0),
+        padding: const EdgeInsets.only(left: 10.0, bottom: 20.0),
         child: FittedBox(
           child: Text(
             widget.topic,
