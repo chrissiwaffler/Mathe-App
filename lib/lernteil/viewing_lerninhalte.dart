@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:mathe_app/index.dart';
-import 'package:mathe_app/website_viewer_geht_nicht.dart';
+// import 'package:mathe_app/website_viewer_geht_nicht.dart';
 
 class AnsichtLerninhalt extends StatefulWidget {
   AnsichtLerninhalt({this.topicTitle, this.mainPath}) : super();

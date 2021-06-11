@@ -24,15 +24,15 @@ export 'package:mathe_app/quiz/view/viewing_quiz_multiple.dart';
 export 'package:mathe_app/quiz/view/viewing_quiz_template.dart';
 export 'package:mathe_app/services/load_txt_file.dart';
 export 'package:mathe_app/quiz/view/view_vierfeldertafel.dart';
-export 'package:mathe_app/services/audio_player_background.dart';
+// export 'package:mathe_app/services/audio_player_background.dart';
 export 'package:mathe_app/services/helper.dart';
 export 'package:mathe_app/quiz/view/view_multiple_choice.dart';
 export 'package:mathe_app/services/load_html.dart';
 export 'package:mathe_app/services/exception_widgets.dart';
-export 'package:mathe_app/xd_splash_animation/splash1.dart';
-export 'package:mathe_app/xd_splash_animation/splash2.dart';
-export 'package:mathe_app/xd_splash_animation/splash3.dart';
-export 'package:mathe_app/xd_splash_animation/splash_screen_main.dart';
+// export 'package:mathe_app/xd_splash_animation/splash1.dart';
+// export 'package:mathe_app/xd_splash_animation/splash2.dart';
+// export 'package:mathe_app/xd_splash_animation/splash3.dart';
+// export 'package:mathe_app/xd_splash_animation/splash_screen_main.dart';
 
 
 
@@ -43,15 +43,15 @@ export 'package:flutter/services.dart';
 export 'package:google_fonts/google_fonts.dart';
 export 'package:mathe_app/customs/custom_transition_routing.dart';
 export 'dart:typed_data';
-export 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
-export 'package:assets_audio_player/assets_audio_player.dart';
+// export 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
+// export 'package:assets_audio_player/assets_audio_player.dart';
 export 'package:shared_preferences/shared_preferences.dart';
 export 'package:path_provider/path_provider.dart';
-export 'package:flutter_html/flutter_html.dart';
-export 'package:flutter_html/html_parser.dart';
-export 'package:flutter_html/style.dart';
+// export 'package:flutter_html/flutter_html.dart';
+// export 'package:flutter_html/html_parser.dart';
+// export 'package:flutter_html/style.dart';
 export 'package:flutter/services.dart';
-export 'package:adobe_xd/adobe_xd.dart';
+// export 'package:adobe_xd/adobe_xd.dart';
 
 
 // export 'package:webview_flutter/webview_flutter.dart';

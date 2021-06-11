@@ -35,7 +35,7 @@ class _BottomNaviBarState extends State<BottomNaviBar> {
     fontSize: buttom_bar_fontsize
   );
 
-  final _bap = BackgroundAudioPlayer();
+  // final _bap = BackgroundAudioPlayer();
 
   // für die Navigationsleiste unten
   static int _selectedIndex = 0;
@@ -64,13 +64,13 @@ class _BottomNaviBarState extends State<BottomNaviBar> {
     });
 
     // falls die Home (Startseite) aktuell zu sehen ist, soll Hintergrundmusik abgespielt werden
-    if (_selectedIndex == 0) {
-      print("playy");
-      await _bap.play();
-    } else {
-      print("pausee");
-      await _bap.pause();
-    }
+    // if (_selectedIndex == 0) {
+    //   print("playy");
+    //   await _bap.play();
+    // } else {
+    //   print("pausee");
+    //   await _bap.pause();
+    // }
   }
 
   void pop() {
