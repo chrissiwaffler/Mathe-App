@@ -305,29 +305,6 @@ class _VierfelderTafelState extends State<VierfelderTafel> {
     validateInput();
   }
   
-
-
-  // TODO Delete unused Text
-  // Widget getHeading() {
-  //   return Text(
-  //     "Bedeutung der Variablen:",
-  //     style: TextStyle(
-  //       fontFamily: "SF Pro Custom",
-  //       fontSize: 20
-  //     ),
-  //   );
-  // }
-
-  // Widget getDefintions() {
-  //   Text(
-  //     definitionen,
-  //     style: TextStyle(
-  //       fontSize: 20,
-  //       fontFamily: "SF Pro Custom"
-  //     )
-  //   );
-  // }
-
   @override
   Widget build(BuildContext context) {
     BorderSide bs = BorderSide(
