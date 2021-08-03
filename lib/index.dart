@@ -2,7 +2,6 @@ export 'package:flutter/material.dart';
 
 /// Dart files of this App ('Package')
 export 'package:mathe_app/customs/bottom_navigation_bar.dart';
-export 'package:mathe_app/buttons_homescreen.dart';
 export 'package:mathe_app/customs/design_registry.dart';
 export 'package:mathe_app/homescreen.dart';
 export 'package:mathe_app/home.dart';
@@ -11,7 +10,6 @@ export 'package:mathe_app/main.dart';
 export 'package:mathe_app/settings.dart';
 export 'package:mathe_app/quiz/quiz_main.dart';
 export 'package:mathe_app/customs/colors.dart';
-export 'package:mathe_app/baumstruktur_json.dart';
 export 'package:mathe_app/home.dart';
 export 'package:mathe_app/lernteil/viewing_lerninhalte.dart';
 export 'package:mathe_app/customs/list_viewer_txt.dart';
