@@ -10,7 +10,6 @@ export 'package:mathe_app/lernteil/lernteil_main.dart';
 export 'package:mathe_app/main.dart';
 export 'package:mathe_app/settings.dart';
 export 'package:mathe_app/quiz/quiz_main.dart';
-export 'package:mathe_app/uebungsteil/uebungen.dart';
 export 'package:mathe_app/customs/colors.dart';
 export 'package:mathe_app/baumstruktur_json.dart';
 export 'package:mathe_app/home.dart';
@@ -24,7 +23,6 @@ export 'package:mathe_app/services/load_txt_file.dart';
 export 'package:mathe_app/quiz/view/view_vierfeldertafel.dart';
 export 'package:mathe_app/services/helper.dart';
 export 'package:mathe_app/quiz/view/view_multiple_choice.dart';
-export 'package:mathe_app/services/load_html.dart';
 export 'package:mathe_app/services/exception_widgets.dart';
 export 'package:mathe_app/customs/side_drawer.dart';
 
