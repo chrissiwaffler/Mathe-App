@@ -1,6 +1,15 @@
 import 'package:mathe_app/index.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
-void main() => runApp(MyApp());
+
+Future<void> main() async {
+  await SentryFlutter.init(
+    (options) {
+      options.dsn = 'https://a2f38ac776c84defa34bb8a2ab9d9286@o942504.ingest.sentry.io/5891362';
+    },
+    appRunner: () => runApp(MyApp()),
+  );
+}  
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
