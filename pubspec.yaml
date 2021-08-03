@@ -19,36 +19,26 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-    
+  
+  # dependencies for codecov
+  # coverage: ^1.0.3
+  # codecov: ^1.0.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   google_fonts: ^2.1.0
-  
-  # following packages disabled due to error
-  #flutter_full_pdf_viewer: ^1.0.6
-  
-  #flutter_pdfview: ^1.0.0+10 
-
-  # flutter_widget_from_html: ^0.5.0+3
-
-  # background audio
-  # assets_audio_player: ^3.0.3+3
 
   # Speichern von Einstellungen
   shared_preferences: ^2.0.6
 
   path_provider: ^2.0.2
-
-  # flutter_html: ^1.0.0
-
-  # webview_flutter: ^0.3.20+2
-
-  # adobe_xd: ^2.0.0+1
   
   flutter_svg: ^0.22.0
 
+  auto_size_text: ^2.1.0
+
+  sentry_flutter: ^5.1.0
 
   
 dev_dependencies:

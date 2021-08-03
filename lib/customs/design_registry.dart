@@ -10,8 +10,6 @@ const Color uebungsteil_loesungen = uebungsteil_aufgaben;
 const Color quiz_aufgaben = Colors.redAccent;
 const Color quiz_loesungen = quiz_aufgaben;
 
-//static const Font
-
 
 const _top_bar_font_size = 35.0;
 
