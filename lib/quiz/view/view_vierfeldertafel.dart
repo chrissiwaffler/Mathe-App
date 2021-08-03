@@ -213,9 +213,10 @@ class _VierfelderTafelState extends State<VierfelderTafel> {
       padding: felderPadding,
       // decoration: getBorderLine(r: r, l: l, t: t, b: b),
       child: Center(
-        child: Text(
+        child: AutoSizeText(
           nicht ? "'Nicht'-" + variables[variableNumber] : variables[variableNumber],
-          style: widget.textStyleVariables
+          style: widget.textStyleVariables,
+          maxLines: 1,
         ),
       ),
     );
@@ -313,6 +314,7 @@ class _VierfelderTafelState extends State<VierfelderTafel> {
     );
      // Vierfeldertafel
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Text(
           this.definitionen,
@@ -323,7 +325,7 @@ class _VierfelderTafelState extends State<VierfelderTafel> {
         Container(
           width: MediaQuery.of(context).size.width*0.4,
           child: Table(
-            defaultVerticalAlignment: TableCellVerticalAlignment.bottom,
+            defaultVerticalAlignment: TableCellVerticalAlignment.middle,
             border: TableBorder.lerp(TableBorder(horizontalInside: bs, verticalInside: bs), TableBorder(), 0),
             children: [
               // 4 TableRows:

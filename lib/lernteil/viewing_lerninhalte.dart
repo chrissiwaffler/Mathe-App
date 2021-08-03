@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:mathe_app/index.dart';
-// import 'package:mathe_app/website_viewer_geht_nicht.dart';
 
 class AnsichtLerninhalt extends StatefulWidget {
   AnsichtLerninhalt({this.topicTitle, this.mainPath}) : super();
@@ -17,33 +16,31 @@ class _AnsichtLerninhaltState extends State<AnsichtLerninhalt> {
   int _currentPage, _maxPages;
   bool _nextPage;
 
-  static BottomNaviBar bNaviBar;
-  
   @override
   void initState() { 
     super.initState();
     _currentPage = 0;
     _nextPage = false;
-    bNaviBar = BottomNaviBar();
     _scrollController = ScrollController();
   }
+
 
   /// Widget zum Anzeigen der Überschrift (Titel des aktuellen Lernthemas)
   Widget title() {
     return Padding(
-        padding: const EdgeInsets.only(left: 20),
-        child: FittedBox(
-          child: Text(
-            // Attribut vom Widget (Titel des Topics) wird als Text angezeigt
+          padding: const EdgeInsets.only(left: 20, top: 40, bottom: 20),
+          child: AutoSizeText(
             widget.topicTitle,
             style: TextStyle(
               color: Colors.black,
               fontFamily: "SF Pro Custom",
-              fontSize: 50,
-              fontWeight: FontWeight.bold
+              fontWeight: FontWeight.bold,
+              fontSize: MediaQuery.of(context).size.width/15.36
             ),
-          ),
-        ),
+            maxFontSize: 50,
+            maxLines: 2,
+            textAlign: TextAlign.center,
+          )
     );
   }
 
@@ -58,6 +55,14 @@ class _AnsichtLerninhaltState extends State<AnsichtLerninhalt> {
     });
 
     return sitesLines;
+  }
+
+
+  /// resizeing the text with the size of the screen
+  /// so the text is readable on every device
+  double getFontSizeText() {
+    double widthDevice = MediaQuery.of(context).size.width;
+    return widthDevice/25.6;
   }
 
   Widget currentSiteText() {
@@ -104,7 +109,7 @@ class _AnsichtLerninhaltState extends State<AnsichtLerninhalt> {
               text: word,
               style: TextStyle(
                 decoration: underline ? TextDecoration.underline : TextDecoration.none,
-                fontSize: 30,
+                fontSize: getFontSizeText(),
                 fontFamily: "SF Pro Custom",
                 fontWeight: bold ? FontWeight.bold : FontWeight.normal,
                 color: Colors.black,
@@ -117,7 +122,7 @@ class _AnsichtLerninhaltState extends State<AnsichtLerninhalt> {
               style: TextStyle(
                 // das Leerzeichen ist ggf. unterstrichen (ja, falls das nächste Wort auch unterstrichen sein soll)
                 decoration: underline2 ? TextDecoration.underline : TextDecoration.none,
-                fontSize: 30,
+                fontSize: getFontSizeText(),
                 fontFamily: "SF Pro Custom",
                 fontWeight: FontWeight.normal,
                 color: Colors.black,
@@ -161,7 +166,7 @@ class _AnsichtLerninhaltState extends State<AnsichtLerninhalt> {
   
   /// define the maximum height and width of the container with the text
   double textBoxMaxHeight() {
-    double factor = isHorizontal() ? 0.60 : 0.70; 
+    double factor = isHorizontal() ? 0.60 : 0.60; 
     return MediaQuery.of(context).size.height * factor;
   }
 
@@ -171,37 +176,25 @@ class _AnsichtLerninhaltState extends State<AnsichtLerninhalt> {
   }
 
   Widget textBox() {
-    return ConstrainedBox(
-      constraints: BoxConstraints(
-        maxHeight: textBoxMaxHeight(),
-        maxWidth: textBoxMaxWidth()
+    return Container(
+      height: MediaQuery.of(context).size.height*0.95,
+      padding: EdgeInsets.all(30),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(40)),
+        color: Colors.white,
+        boxShadow: [BoxShadow(
+          color: color_shadow,
+          blurRadius: 30.0,
+          offset: Offset(10, 10)
+        )]
       ),
-      child: Container(
-        height: double.infinity,
-        width: double.infinity,
-        padding: EdgeInsets.all(30),
-        // color: Colors.white,
-        // height: MediaQuery.of(context).size.height/2,
-        // width: MediaQuery.of(context).size.width-leftPaddingRow*2,
 
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(40)),
-          color: Colors.white,
-          boxShadow: [BoxShadow(
-            color: color_shadow,
-            blurRadius: 30.0,
-            offset: Offset(10, 10)
-          )]
-        ),
-
-        child: SingleChildScrollView(
-          controller: _scrollController,
-          child: currentSiteText(),
-          scrollDirection: Axis.vertical,
-          physics: BouncingScrollPhysics()
-        )
-        // child: currentSiteText()
-      ),
+      child: SingleChildScrollView(
+        controller: _scrollController,
+        child: currentSiteText(),
+        scrollDirection: Axis.vertical,
+        physics: BouncingScrollPhysics()
+      )
     );
   }
 
@@ -255,14 +248,22 @@ class _AnsichtLerninhaltState extends State<AnsichtLerninhalt> {
           // ),
           
           // backgroundColor: color_background,
-          title: Text("Geschafft!"),
-          content: Text("Zurück zur Übersicht?"),
+          title: Text(
+            "Geschafft!",
+            style: TextStyle(fontSize: getFontSizeText())
+          ),
+          content: Text(
+            "Zurück zur Übersicht?",
+            style: TextStyle(fontSize: getFontSizeText())
+          ),
+
           actions: [
             // Nein-Button
             FlatButton(
               child: Text(
                 "Nein",
                 style: TextStyle(
+                  fontSize: getFontSizeText(),
                   fontFamily: "SF Pro Custom",
                   color: color_bottom_bar_app
                 )
@@ -276,6 +277,7 @@ class _AnsichtLerninhaltState extends State<AnsichtLerninhalt> {
               child: Text(
                 "Ja",
                 style: TextStyle(
+                  fontSize: getFontSizeText(),
                   fontFamily: "SF Pro Custom",
                   color: Colors.black
                 ),
@@ -292,10 +294,10 @@ class _AnsichtLerninhaltState extends State<AnsichtLerninhalt> {
   }
 
 
-  Widget button_sample(String text, bool isLeftButton) {
+  Widget buttonSample(String text, bool isLeftButton) {
     return Container(
       child: RaisedButton(
-        color: color_button_lernteil,
+        color: Colors.white70,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30),
           side: BorderSide(
@@ -304,16 +306,14 @@ class _AnsichtLerninhaltState extends State<AnsichtLerninhalt> {
         ),
         padding: EdgeInsets.symmetric(vertical: 5, horizontal: 30),
         highlightElevation: 5,
-        // highlightColor: Colors.green,
         
-
         child: Text(
           text,
           style: TextStyle(
             color: Colors.black,
             fontFamily: "SF Pro Custom",
-            fontWeight: FontWeight.w500,
-            fontSize: 30
+            fontWeight: FontWeight.w700,
+            fontSize: getFontSizeText()
           )
         ),
 
@@ -326,75 +326,52 @@ class _AnsichtLerninhaltState extends State<AnsichtLerninhalt> {
       // shadow for button -> wrap in container
       decoration: BoxDecoration(
         color: Colors.transparent,
-        boxShadow: [BoxShadow(
-          color: color_shadow,
-          blurRadius: 20,
-          offset: Offset(5, 5)
-        )]
       ),
     );
   }
 
-
-  Widget leftButton() {
-    return button_sample("Zurück", true);
+  /// dynamically adjusted padding
+  double getPaddingHorizontal() {
+    double width = MediaQuery.of(context).size.width;
+    return width / 15.36;
   }
-
-  Widget rightButton() {
-    if (_nextPage) {
-      return button_sample("Weiter", false);
-    } else {
-      return button_sample("Fertig", false);
-    }
-  }
-
-  Widget buttonsRow() {
-    return Row(
-      children: [
-        leftButton(),
-        rightButton()
-      ],
-      // TODO check Abstand
-      
-    );
-  }
-
-  static const double leftPaddingRow = 50;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: color_hintergrund_lernteil,
+      backgroundColor: color_background,
       body: Padding(
-        padding: const EdgeInsets.only(left: leftPaddingRow, top: 30, right: leftPaddingRow),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          
-          children: [
-            title(),
-            SizedBox(height: 20),
-            textBox(),
-            SizedBox(height: 30),
-            // buttonsRow()
-
-            Row(
-              children: [
-                // left button
-                button_sample("Zurück", true),
-
-                // right button
-                _nextPage ? button_sample("Weiter", false) : button_sample("Fertig", false)
-              ],
-
-              // TODO check Alignment
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            )
-          ],
+        padding: EdgeInsets.symmetric(
+          horizontal: getPaddingHorizontal()
         ),
+        child: Column(children: [
+          Flexible(
+            flex: 1,
+            child: title(),
+          ),
+          Flexible(
+            fit: FlexFit.loose,
+            flex: 5,
+            child: textBox()
+          )
+        ],
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        )
       ),
 
+      bottomNavigationBar: Padding(
+        padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height / 35),
+        child: Row(
+          children: [
+            // left button
+            buttonSample("Zurück", true),
 
-      bottomNavigationBar: bNaviBar,
+            // right button
+            _nextPage ? buttonSample("Weiter", false) : buttonSample("Fertig", false)
+          ],
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        ),
+      ),
     );
   }
 }

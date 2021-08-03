@@ -108,15 +108,17 @@ class _ListeLerninhalteState extends State<ListeLerninhalte> {
             )
           )
         ),
-        child: Text(
+        child: AutoSizeText(
           heading,
           style: TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.w600,
             fontFamily: "SF Pro Custom",
-            fontSize: 25,
-            letterSpacing: 0.6
+            fontSize: 20,
+            // letterSpacing: 0.6
           ),
+          maxLines: 4,
+          maxFontSize: 25,
         ),
       ),
 

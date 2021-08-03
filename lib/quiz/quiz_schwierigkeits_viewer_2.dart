@@ -91,7 +91,7 @@ class ListeQuizinhalte2State extends State<ListeQuizinhalte2> {
     }
   }
 
-  double left_padding_list_text = 20.0;
+  double leftPaddingListText = 20.0;
 
   Widget makeListTile(int schwierigkeitsgrad, int nummerAufgabe) {
     String info = "";
@@ -109,17 +109,7 @@ class ListeQuizinhalte2State extends State<ListeQuizinhalte2> {
           maxWidth: MediaQuery.of(context).size.width * 0.04
         ),
         child: Container(
-          
-          // padding: EdgeInsets.only(right: 10.0),
           alignment: Alignment.center,
-          decoration: new BoxDecoration(
-            // border: new Border(
-            //   right: new BorderSide(
-            //     width: 2.0, color: Colors.greenAccent
-            //   ),
-            // )
-          ),
-          
           // Symbol links
           child: Icon(
             Icons.blur_on,
@@ -131,7 +121,7 @@ class ListeQuizinhalte2State extends State<ListeQuizinhalte2> {
 
       // Überschrift
       title: Container(
-        padding: EdgeInsets.only(left: left_padding_list_text),
+        padding: EdgeInsets.only(left: leftPaddingListText),
         decoration: BoxDecoration(
           border: Border(
             left: BorderSide(
@@ -139,8 +129,7 @@ class ListeQuizinhalte2State extends State<ListeQuizinhalte2> {
             )
           )
         ),
-        child: Text(
-          // "Schwierigkeitsgrad: $schwierigkeitsgrad, Nr. ${nummerAufgabe+1}",
+        child: AutoSizeText(
           "Nr. ${nummerAufgabe+1} (Schwierigkeitsgrad: $schwierigkeitsgrad)",
           style: TextStyle(
             color: Colors.black,
@@ -149,12 +138,14 @@ class ListeQuizinhalte2State extends State<ListeQuizinhalte2> {
             fontSize: 25,
             letterSpacing: 0.6
           ),
+          maxLines: 2,
+          maxFontSize: 25,
         ),
       ),
 
       // Leiste unter dem Titel
       subtitle: Container(
-        padding: EdgeInsets.only(left: left_padding_list_text, top: 5),
+        padding: EdgeInsets.only(left: leftPaddingListText, top: 5),
         decoration: BoxDecoration(
           border: Border(
             left: BorderSide(
@@ -173,14 +164,15 @@ class ListeQuizinhalte2State extends State<ListeQuizinhalte2> {
             SizedBox(width: 10),
             
             // Untertitel
-            Text(
+            AutoSizeText(
               info,
               style: TextStyle(
                 color: Colors.black,
                 fontFamily: "SF Pro Rounded",
                 fontWeight: FontWeight.w400,
-                fontSize: 20
               ),
+              maxLines: 1,
+              maxFontSize: 20,
             )
           ],
         ),
@@ -199,14 +191,7 @@ class ListeQuizinhalte2State extends State<ListeQuizinhalte2> {
     if (this.infosAufgaben == [] || this.infosAufgaben == null || this.infosAufgaben.length != this.numAufgaben) {
       this.infosAufgaben = List<List<int>>(this.numAufgaben);
     }
-    // // Laden der Werte; Anzahl der richtigen und gesamten Aufgaben
-    // var prefs = await SharedPreferences.getInstance();
-    // int numAufgaben = prefs.getInt(path+"g");
-    // int numGeloest = prefs.getInt(path+"r");
-
-    // setState(() {
-    //   this.infosAufgaben[nummerAufgabe] = [numGeloest, numAufgaben];
-    // });
+    // Laden der Werte; Anzahl der richtigen und gesamten Aufgaben
     int numGesamt;
     int numGeloest;
 
@@ -269,9 +254,6 @@ class ListeQuizinhalte2State extends State<ListeQuizinhalte2> {
         return ListView.builder(
           itemCount: liste.length,
           itemBuilder: (BuildContext context, int index) {
-            // for (int i = 0; i < liste[index].length; ++i) {
-            //   return makeCard(liste[index][i], index);
-            // }
             return makeCard(liste[index], index);
           },
           padding: const EdgeInsets.all(8),

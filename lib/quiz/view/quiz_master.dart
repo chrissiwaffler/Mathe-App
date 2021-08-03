@@ -163,20 +163,27 @@ class _QuizMasterState extends State<QuizMaster> {
   }
 
   Widget teilaufgabeHeading(int nummer) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 5.0),
-      child: FittedBox(
-        child: Text(
-          "Teilaufgabe ${nummer+1}:",
-          textAlign: TextAlign.left,
-          style: TextStyle(
-            color: Colors.black,
-            fontFamily: "SF Pro Custom",
-            fontSize: 25,
-            fontWeight: FontWeight.w600
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(bottom: 5.0),
+          child: FittedBox(
+            child: Text(
+              "Teilaufgabe ${nummer+1}:",
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                color: Colors.black,
+                fontFamily: "SF Pro Custom",
+                fontSize: 25,
+                fontWeight: FontWeight.w600
+              ),
+            ),
           ),
         ),
-      ),
+
+        informationButton("vft")
+      ]
     );
   }
   
@@ -286,8 +293,6 @@ class _QuizMasterState extends State<QuizMaster> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: teilaufgabeWidgets,
           ),
-
-          trailing: informationButton("vft"),
         );
 
         numberAufgabe++;
@@ -380,12 +385,13 @@ class _QuizMasterState extends State<QuizMaster> {
         padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
         highlightElevation: 5,
 
-        child: Text(
+        child: AutoSizeText(
           text,
           style: TextStyle(
             fontFamily: "SF Pro Custom",
             fontSize: 20
           ),
+          maxFontSize: 20,
         ),
 
         onPressed: () {

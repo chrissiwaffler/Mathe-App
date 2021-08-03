@@ -163,7 +163,7 @@ class _ListeQuizinhalte1State extends State<ListeQuizinhalte1> {
             )
           )
         ),
-        child: Text(
+        child: AutoSizeText(
           title,
           style: TextStyle(
             color: Colors.black,
@@ -172,6 +172,8 @@ class _ListeQuizinhalte1State extends State<ListeQuizinhalte1> {
             fontSize: 25,
             letterSpacing: 0.6
           ),
+          maxLines: 2,
+          maxFontSize: 25,
         ),
       ),
 
@@ -196,14 +198,15 @@ class _ListeQuizinhalte1State extends State<ListeQuizinhalte1> {
             SizedBox(width: 10),
 
             // Untertitel
-            Text(
+            AutoSizeText(
               info,
               style: TextStyle(
                 color: Colors.black,
                 fontFamily: "SF Pro Rounded",
                 fontWeight: FontWeight.w400,
-                fontSize: 20
               ),
+              maxLines: 1,
+              maxFontSize: 20,
             )
           ],
         ),
