@@ -1,6 +1,6 @@
 import 'package:mathe_app/index.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
-
+import 'package:flutter/services.dart';
 
 Future<void> main() async {
   await SentryFlutter.init(
@@ -15,6 +15,16 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
+    // if device is a smartphone,
+    // landscape mode should be disabled
+    if(Helper().getDeviceType() == 'phone') {
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown
+      ]);
+    }
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Mathe App',
@@ -27,9 +37,7 @@ class MyApp extends StatelessWidget {
             Theme.of(context).textTheme,
           )),
 
-      // ? Hier auf SplashScreen() wechseln, um die SplashScreen Animation anzuzeigen
       home: Home(),
-      
     );  
   }
 }
