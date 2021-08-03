@@ -22,6 +22,7 @@ class _LernteilState extends State<Lernteil> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: color_top_bar_app,
         title: Text(
           "Lernteil",

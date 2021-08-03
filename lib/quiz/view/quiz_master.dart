@@ -515,9 +515,10 @@ class _QuizMasterState extends State<QuizMaster> {
       // Zu Beginn werden alle bestehende Eingaben geladen und ausgewertet
       updateValidationScoreAll();
     }
-    // TODO
+    
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text(
           "Quiz",
           style: top_bar_text_style,
