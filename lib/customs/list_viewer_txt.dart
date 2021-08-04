@@ -2,8 +2,6 @@ import 'package:mathe_app/index.dart';
 
 class ListeLerninhalte extends StatefulWidget {
   ListeLerninhalte({this.txt, this.child, this.mainPath}) : super();
-  // Path of the txt-File with all the headings
-  final String txt;
 
   // Parameter for the child widget of the MaterialPageRoute when tapping on the card
   final AnsichtLerninhalt child;
@@ -11,26 +9,24 @@ class ListeLerninhalte extends StatefulWidget {
   // main path of the current directory, e.g. 'assets/data/lernteil/'
   final String mainPath;
 
+  // Path of the txt-File with all the headings
+  final String txt;
+
   @override
   _ListeLerninhalteState createState() => _ListeLerninhalteState();
 }
 
 class _ListeLerninhalteState extends State<ListeLerninhalte> {
-  
   Widget childWidget;
-
-  Future<List<String>> _loadLerninhalteList() async {
-    return TxtFileLoader().loadSplittedLines(widget.mainPath + widget.txt, true);
-    
-    // String txt = await rootBundle.loadString(widget.mainPath + widget.txt);
-    // List <String> list = LineSplitter().convert(txt).toList();
-    // list.removeWhere((item) => item=="" || item==" ");
-    // return list;
-  }
+  double leftPaddingListText = 20.0;
 
   @override
   void initState() { 
     super.initState();
+  }
+
+  Future<List<String>> _loadLerninhalteList() async {
+    return TxtFileLoader().loadSplittedLines(widget.mainPath + widget.txt, true);
   }
 
   Widget createChild(String heading, String subtitle) {
@@ -63,9 +59,6 @@ class _ListeLerninhalteState extends State<ListeLerninhalte> {
     );
   }
 
-  double left_padding_list_text = 20.0;
-  
-
   Widget makeListTile(String heading, String subtitle) {
     return ListTile(
       contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),  
@@ -73,20 +66,10 @@ class _ListeLerninhalteState extends State<ListeLerninhalte> {
       // linker Container
       leading: ConstrainedBox(
         constraints: BoxConstraints(
-          // maxWidth: MediaQuery.of(context).size.width * 0.0,
           maxWidth: MediaQuery.of(context).size.width * 0.04
         ),
         child: Container(
-          
-          // padding: EdgeInsets.only(right: 10.0),
           alignment: Alignment.center,
-          decoration: new BoxDecoration(
-            // border: new Border(
-            //   right: new BorderSide(
-            //     width: 2.0, color: Colors.greenAccent
-            //   ),
-            // )
-          ),
           
           // Symbol links
           child: Icon(
@@ -99,7 +82,7 @@ class _ListeLerninhalteState extends State<ListeLerninhalte> {
 
       // Überschrift
       title: Container(
-        padding: EdgeInsets.only(left: left_padding_list_text),
+        padding: EdgeInsets.only(left: leftPaddingListText),
         decoration: BoxDecoration(
           border: Border(
             left: BorderSide(
@@ -113,44 +96,12 @@ class _ListeLerninhalteState extends State<ListeLerninhalte> {
             color: Colors.black,
             fontWeight: FontWeight.w600,
             fontFamily: "SF Pro Custom",
-            fontSize: 20,
-            // letterSpacing: 0.6
+            fontSize: MediaQuery.of(context).size.width / 20,
           ),
-          maxLines: 4,
+          maxLines: 3,
           maxFontSize: 25,
         ),
       ),
-
-      // // Leiste unter dem Titel
-      // subtitle: Container(
-      //   padding: EdgeInsets.only(left: left_padding_list_text),
-      //   decoration: BoxDecoration(
-      //     border: Border(
-      //       left: BorderSide(
-      //         width: 2.0, color: color_top_bar_app
-      //       )
-      //     )
-      //   ),
-
-      //   child: Row(
-      //     children: <Widget>[
-      //       Icon(
-      //         Icons.linear_scale,
-      //         color: color_list_arrow
-      //       ),
-            
-      //       // Untertitel
-      //       Text(
-      //         subtitle,
-      //         style: TextStyle(
-      //           color: Colors.black,
-      //           fontFamily: "SF Pro Rounded",
-      //           fontWeight: FontWeight.w400
-      //         ),
-      //       )
-      //     ],
-      //   ),
-      // ),
 
       // Symbol rechts
       trailing: Icon(
@@ -160,7 +111,7 @@ class _ListeLerninhalteState extends State<ListeLerninhalte> {
       )
     );
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -177,8 +128,7 @@ class _ListeLerninhalteState extends State<ListeLerninhalte> {
             return makeCard('${liste[index]}', " <Untertitel> ");
           },
           padding: const EdgeInsets.all(8),
-         );
-      
+        );
     });
   }
 }

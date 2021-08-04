@@ -28,7 +28,7 @@ class _AnsichtLerninhaltState extends State<AnsichtLerninhalt> {
   /// Widget zum Anzeigen der Überschrift (Titel des aktuellen Lernthemas)
   Widget title() {
     return Padding(
-          padding: const EdgeInsets.only(left: 20, top: 40, bottom: 20),
+          padding: const EdgeInsets.only(left: 20, top: 50, bottom: 20),
           child: AutoSizeText(
             widget.topicTitle,
             style: TextStyle(

@@ -116,7 +116,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: SideDrawer(),
+      // drawer wil be added later
+      // drawer: SideDrawer(),
+      
+
       backgroundColor: color_background,
       appBar: AppBar(
         centerTitle: true,
@@ -126,6 +129,9 @@ class _HomeScreenState extends State<HomeScreen> {
           style: top_bar_text_style,
           textAlign: TextAlign.center,
         ),
+
+        // TODO remove when adding the sidebar/drawer
+        leading: Container()
       ),
 
       body: Column(
